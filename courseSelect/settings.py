@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'courseSelect.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'courseSelect',
+        'NAME': 'courseselect',
         'USER': 'root',
-        'PASSWORD': '12345678',
+        'PASSWORD': '801559',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
