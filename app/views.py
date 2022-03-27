@@ -238,7 +238,7 @@ def login(request):
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
                     request.session['user_kind'] = user.kind
-                    return redirect('app:index')
+                    return redirect('app:index_s')
                 else:
                     message = "密码不正确！"
             except:
