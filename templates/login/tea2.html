@@ -12,23 +12,6 @@
             </div>
             <!-- /.container-fluid -->
         </section>
-
-{#        <div id="bg">#}
-{#            <div CLASS="head">#}
-{#                <h2>登记成绩</h2>#}
-{#            </div>#}
-{#            <div class="find">#}
-{##}
-{#                <p>请输入课程代号：</p><br>#}
-{#                <form action="/tea2/" method="post">#}
-{#                    {% csrf_token %}#}
-{#                    <input type="text" name="course_id" value="{{ course_id }}" formmethod="post"#}
-{#                           style="font-size: 18px ;width: 150px">#}
-{#                    <input type="submit" value="确认" class="btn0">#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -38,15 +21,6 @@
                             <div class="card-header">
                                 <h3 class="card-title">已开设课程信息表</h3>
                                 <div class="card-tools">
-                                    {#                                    <div class="input-group input-group-sm" style="width: 150px;">#}
-                                    {#                                        <input type="text" name="table_search" class="form-control float-right"#}
-                                    {#                                               placeholder="Search">#}
-                                    {#                                        <div class="input-group-append">#}
-                                    {#                                            <button type="submit" class="btn btn-default">#}
-                                    {#                                                <i class="fas fa-search"></i>#}
-                                    {#                                            </button>#}
-                                    {#                                        </div>#}
-                                    {#                                    </div>#}
                                     <form action="/tea2/" method="post">
                                         {% csrf_token %}
                                         <div class="input-group">
