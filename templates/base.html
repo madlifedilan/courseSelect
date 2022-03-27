@@ -61,7 +61,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0;">
                     {% if request.session.is_login %}
-                        <span class="dropdown-item dropdown-header">当前在线：{{ request.session.user_name }}</span>
+                        <span class="dropdown-item dropdown-header">当前在线：{{ request.session.user_name }}  {{ request.session.user_kind }}</span>
                         <div class="dropdown-divider"></div>
                         <a href="{% url 'app:logout' %}" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i> 4 new messages
@@ -768,6 +768,7 @@
         </div>
         <!-- /.sidebar -->
     </aside>
+    <!-- /.Main Sidebar Container -->
 
     <div class="content-wrapper" style="min-height: 815px;">
     <section class="content">
