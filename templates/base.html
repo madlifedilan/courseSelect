@@ -61,7 +61,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0;">
                     {% if request.session.is_login %}
-                        <span class="dropdown-item dropdown-header">当前在线：{{ request.session.user_name }}  {{ request.session.user_kind }}</span>
+                        <span class="dropdown-item dropdown-header">当前在线：{{ request.session.user_name }} {{ request.session.user_kind }}</span>
                         <div class="dropdown-divider"></div>
                         <a href="{% url 'app:logout' %}" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i> 4 new messages
@@ -95,7 +95,8 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
-            <img src="{% static "adminLTE/dist/img/AdminLTELogo.png" %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <img src="{% static "adminLTE/dist/img/AdminLTELogo.png" %}" alt="AdminLTE Logo"
+                 class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>
@@ -105,7 +106,8 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{% static "adminLTE/dist/img/user2-160x160.jpg" %}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{% static "adminLTE/dist/img/user2-160x160.jpg" %}" class="img-circle elevation-2"
+                         alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">Alexander Pierce</a>
@@ -162,6 +164,12 @@
                         </ul>
                     </li>
                     {#/.Dashboard#}
+                    {#teacher#}
+                    {% if request.session.user_kind is '教师' %}
+
+                        {#/.teacher#}
+                    {% elif reuest.session.user_kind is '学生' %}
+                    {% endif %}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -170,19 +178,29 @@
     </aside>
     <!-- /.Main Sidebar Container -->
 
+    {# Main Content #}
     <div class="content-wrapper" style="min-height: 815px;">
-    <section class="content">
+        <section class="content">
             {% block content %}{% endblock %}
-    </section>
+        </section>
     </div>
 
-
-    <!-- jQuery -->
-    <script src="{% static 'adminLTE/plugins/jquery/jquery.min.js' %}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{% static 'adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <!-- AdminLTE App -->
-    <script src="{% static 'adminLTE/dist/js/adminlte.min.js' %}"></script>
 </div>
+
+
+<footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+        <b>Version</b> 3.2.0
+    </div>
+    <strong>Copyright © 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+</footer>
+
+<!-- jQuery -->
+<script src="{% static 'adminLTE/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'adminLTE/dist/js/adminlte.min.js' %}"></script>
 </body>
+
 </html>
