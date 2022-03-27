@@ -2,6 +2,6 @@
 {% block title %}主页{% endblock %}
 {% block content %}
     {% if not request.session.is_login %}
-        您尚未登录，请先登录！
+        <h1>您尚未登录，请先登录！</h1>
     {% endif %}
 {% endblock %}

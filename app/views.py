@@ -238,13 +238,6 @@ def login(request):
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
                     request.session['user_kind'] = user.kind
-                    print(user.kind)
-                    # if user.kind == '教师':
-                    #     return redirect('/index_t/')
-                    # if user.kind == '管理员':
-                    #     return redirect('/index_a/')
-                    # else:
-                    #     return redirect('/index_s/')
                     return redirect('app:index')
                 else:
                     message = "密码不正确！"
