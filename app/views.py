@@ -204,7 +204,7 @@ def register(request):
                 new_user.password = password1
                 new_user.kind = kind
                 new_user.save()
-                if kind == 'teacher':
+                if kind == '教师':
                     new_tea = Teacher.objects.create(id_id=new_user.id)
                     new_tea.teacherName = real_name
                     new_tea.teacherID = id
@@ -237,6 +237,7 @@ def login(request):
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
                     request.session['user_kind'] = user.kind
+                    print(user.kind)
                     # if user.kind == '教师':
                     #     return redirect('/index_t/')
                     # if user.kind == '管理员':
