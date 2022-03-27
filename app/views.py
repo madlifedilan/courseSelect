@@ -89,7 +89,10 @@ def reg(request):
         new_score = Score.objects.create(scoreCourse=cname, score_date=score,
                                          scoreStudent_id=idid, scoreCredit=ccredit)
         new_score.save()
-        return render(request, 'login/reg_score.html')
+        context = {
+            "student_inform_reg": student_inform_reg
+        }
+        return render(request, 'login/reg_score.html', context=context)
 
 
 def stu1(request):

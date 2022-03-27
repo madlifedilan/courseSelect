@@ -165,10 +165,54 @@
                     </li>
                     {#/.Dashboard#}
                     {#teacher#}
-                    {% if request.session.user_kind is '教师' %}
-
+                    {% if request.session.user_kind == '教师' %}
+                        <li class="nav-item">
+                            <a href="{% url 'app:tea1' %}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    tea1
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'app:tea2' %}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    tea2
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
                         {#/.teacher#}
-                    {% elif reuest.session.user_kind is '学生' %}
+                    {% elif request.session.user_kind == '学生' %}
+                        <li class="nav-item">
+                            <a href="{% url 'app:stu1' %}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    stu1
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'app:stu2' %}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    stu2
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'app:stu3' %}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    stu3
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
                     {% endif %}
                 </ul>
             </nav>
@@ -180,7 +224,7 @@
 
     {# Main Content #}
     <div class="content-wrapper" style="min-height: 815px;">
-            {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
     </div>
 
 </div>
