@@ -227,6 +227,7 @@ def login(request):
     if request.method == "POST":
         login_form = UserForm(request.POST)
         message = "请检查填写的内容！"
+        # 检查表单
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
