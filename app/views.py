@@ -278,3 +278,7 @@ def update(request):
                 teacher = Teacher.objects.update_or_create(id_id=user[0].id, teacherName=i, teacherID=i)
                 course[0].courseTeacher.add(teacher[0])
     pass
+
+
+def base(request):
+    return render(request, 'base.html')
