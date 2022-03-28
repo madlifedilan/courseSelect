@@ -10,31 +10,49 @@
                             <h3 class="card-title">选课页面</h3>
                             {% csrf_token %}
                         </div>
-                        <div class="card-body">
-                            <table id="courseSelect" class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th>课程代号</th>
-                                    <th>课程名称</th>
-                                    <th>课程学分</th>
-                                    <th>授课教师</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for course in course_inform %}
-                                    <tr>
-                                        <td>{{ course.id }}</td>
-                                        <td>{{ course.courseName }}</td>
-                                        <td>{{ course.courseCredit }}</td>
-                                        <td>{{ course.courseTeacher.teacherName }}</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                        <div class="card-tools">
+                            <form action="/stu1/" method="post">
+                                {% csrf_token %}
+                                <div class="input-group">
+                                    <input type="text" name="course_add_id" value="{{ course_add_id }}"
+                                           formmethod="post" class="form-control form-control-lg"
+                                           placeholder="输入课程号">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-lg btn-default">
+                                            选课
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
+
+
+                    </div>
+                    <div class="card-body">
+                        <table id="courseSelect" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>课程代号</th>
+                                <th>课程名称</th>
+                                <th>课程学分</th>
+                                <th>授课教师</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for course in course_inform %}
+                                <tr>
+                                    <td>{{ course.id }}</td>
+                                    <td>{{ course.courseName }}</td>
+                                    <td>{{ course.courseCredit }}</td>
+                                    <td>{{ course.courseTeacher.teacherName }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 {% endblock %}
