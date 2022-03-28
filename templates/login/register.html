@@ -1,56 +1,121 @@
-{% extends 'login/../base.html' %}
-{% block title %}注册{% endblock %}
-{% block css %}
-<style>
-    body{
-        background:url("../../../static/img/009.jpg")no-repeat center center fixed;
-        background-size:100%;
-        height: 400px;
-        font-size: 18px;
-    }
-</style>
-{% endblock %}
-{% block content %}
-    <div class="container">
-        <div class="col-md-4 col-md-offset-4">
-          <form class='form-register' action="/register/" method="post">
- 
-              {% if message %}
-                  <div class="alert alert-warning">{{ message }}</div>
-              {% endif %}
- 
-              {% csrf_token %}
- 
-              <h2 class="text-center">欢迎注册</h2>
-              <div class="form-group">
-                  {{ register_form.username.label_tag }}
-                  {{ register_form.username}}
-              </div>
-              <div class="form-group">
-                  {{ register_form.password1.label_tag }}
-                  {{ register_form.password1 }}
-              </div>
-              <div class="form-group">
-                  {{ register_form.password2.label_tag }}
-                  {{ register_form.password2 }}
-              </div>
-              <div class="form-group">
-                  {{ register_form.real_name.label_tag }}
-                  {{ register_form.real_name }}
-              </div>
-              <div class="form-group">
-                  {{ register_form.id.label_tag }}
-                  {{ register_form.id }}
-              </div>
-              <div class="form-group">
-                  {{ register_form.kind.label_tag }}
-                  {{ register_form.kind }}
-              </div>
- 
-              <button type="reset" class="btn btn-default pull-left">重置</button>
-              <button type="submit" class="btn btn-primary pull-right">提交</button>
- 
-          </form>
+<!DOCTYPE html>
+<html lang="en">
+<head><script nonce="7b32b071-8a44-4011-81d1-d14413975ebe">(function(w,d){!function(a,e,t,r){a.zarazData=a.zarazData||{},a.zarazData.executed=[],a.zarazData.tracks=[],a.zaraz={deferred:[]},a.zaraz.track=(e,t)=>{for(key in a.zarazData.tracks.push(e),t)a.zarazData["z_"+key]=t[key]},a.zaraz._preSet=[],a.zaraz.set=(e,t,r)=>{a.zarazData["z_"+e]=t,a.zaraz._preSet.push([e,t,r])},a.addEventListener("DOMContentLoaded",(()=>{var t=e.getElementsByTagName(r)[0],z=e.createElement(r),n=e.getElementsByTagName("title")[0];n&&(a.zarazData.t=e.getElementsByTagName("title")[0].text),a.zarazData.w=a.screen.width,a.zarazData.h=a.screen.height,a.zarazData.j=a.innerHeight,a.zarazData.e=a.innerWidth,a.zarazData.l=a.location.href,a.zarazData.r=e.referrer,a.zarazData.k=a.screen.colorDepth,a.zarazData.n=e.characterSet,a.zarazData.o=(new Date).getTimezoneOffset(),z.defer=!0,z.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a.zarazData))),t.parentNode.insertBefore(z,t)}))}(w,d,0,"script");})(window,document);</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Sakura | Log in</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+<link rel="stylesheet" href="{% static "adminLTE/plugins/fontawesome-free/css/all.min.css"%}" >
+
+<link rel="stylesheet" href="{% static "adminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css"%}">
+
+<link rel="stylesheet" href="{% static "adminLTE/dist/css/adminlte.min.css"%}">
+</head>
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <!-- /.login-logo -->
+        <div class="register-logo">
+            <a href="../"><b>Admin</b>用户管理系统</a>
         </div>
-    </div> <!-- /container -->
-{% endblock %}
+        <div class="card">
+            <form action="{% url 'app:register' %}" method="post">
+
+                {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+                <div class="card-body register-card-body">
+                    <p class="login-box-msg">Register a new membership</p>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Real Name" name="real_name">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Username" name="username">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Full ID" name="id">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-id-card"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <select type="text" class="form-control" name="kind">
+                            <option value="教师">teacher</option>
+                            <option value="学生">student</option>
+                        </select>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-pen"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email" name="email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password" name="password1">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Retype password" name="password2">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                <label for="agreeTerms">
+                                    I agree to the <a href="#">terms</a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+        </form>
+    </div>
+    </div>
+<!-- jQuery -->
+<script src="{% static 'adminLTE/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static "adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static "adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+</body>

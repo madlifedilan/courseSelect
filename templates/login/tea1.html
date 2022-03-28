@@ -1,78 +1,42 @@
-<meta charset="utf-8">
-{% extends 'base_tea.html' %}
+{% extends 'base.html' %}
 {% block title %}开设课程
 {% endblock %}
 {% block content %}
-    <style type="text/css">
-    body{
-        background:url("../../../static/img/001.jpg")no-repeat center center fixed;
-        background-size:100%;
-        height: 400px;
-        font-size: 18px;
-    }
-    .div1{
-        height:260px;
-        width: 350px;
-        margin-left: 400px;
-        {#margin-right: 20px;#}
-        margin-top: 100px;
-        margin-bottom:100px ;
-        background-color: gainsboro;
-        opacity:0.7;
-        filter:alpha(opacity=70);
-        padding-top: 10px;
-        padding-left: 60px;
-        border-radius: 30px;
-    }
-
-    .input1{
-        width:200px;
-        height: 30px;
-        border-style:solid;
-        border-top: 0px;
-        border-left: 0px;
-        border-right: 0px;
-        background-color: gainsboro;
-        opacity:0.7;
-        filter:alpha(opacity=70);
-    }
-    .input02{
-        border-radius: 30px;
-        height: 30px;
-        width: 105px;
-        border-color: black;
-        margin-left: 180px;
-    }
-    .select01{
-         border-radius: 30px;
-        border-color: dimgray;
-        height: 28px;
-        width: 110px;
-        border-width:2px;
-    }
-    h2{
-        margin-left: 80px;
-    }
-</style>
-
-    <div class="div1">
-    <form>
-                {% csrf_token %}
-<h2>课程信息</h2>
-    课程号:<input class="input1"name="courseID"><br><br>
-
-    课程名称:<input class="input1"name="courseName"><br><br>
-
-    课序号:<input class="input1"name="courseSeries"><br><br>
-
-    课程学分:<input class="input1"name="courseCredit"><br><br>
-
-    授课教师:<input class="input1"name="teacherName"><br><br>
-
-
- <input class="input02" type="submit"  value="确认" onclick="alert('开设课程成功！')"formaction="/tea1/"formmethod="post">
-        <input class="input02" type="submit"  value="返回上一级"formaction="/index_t/"formmethod="get">
-
-    </form>
-</div>
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">课程信息</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form>
+            {% csrf_token %}
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="courseID">课程号</label>
+                    <input class="form-control" name="courseID" id="courseID" placeholder="输入课程号">
+                </div>
+                <div class="form-group">
+                    <label for="courseName">课程名称</label>
+                    <input class="form-control" name="courseName" id="courseName" placeholder="输入课程名称">
+                </div>
+                <div class="form-group">
+                    <label for="courseSeries">课序号</label>
+                    <input class="form-control" name="courseSeries" id="courseSeries" placeholder="输入课序号">
+                </div>
+                <div class="form-group">
+                    <label for="courseCredit">课程学分</label>
+                    <input class="form-control" name="courseCredit" id="courseCredit" placeholder="输入课程学分">
+                </div>
+                <div class="form-group">
+                    <label for="teacherName">授课教师</label>
+                    <input class="form-control" name="teacherName" id="teacherName" placeholder="输入授课教师">
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" formaction="/tea1/" formmethod="post">确认</button>
+                    <button type="submit" class="btn btn-primary" formaction="/index_t/" formmethod="get">返回上一级</button>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}

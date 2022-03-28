@@ -1,16 +1,7 @@
-<meta charset="utf-8">
 {% extends 'base.html' %}
 {% block title %}主页{% endblock %}
 {% block content %}
-     <style>
-    body{
-        background:url("../../../static/img/002.jpg")no-repeat center center fixed;
-        background-size:100%;
-        height: 400px;
-        font-size: 18px;
-    }
-    </style>
     {% if not request.session.is_login %}
-    <h1>您尚未登录，请先登录！</h1>
+        <h1>您尚未登录，请先登录！</h1>
     {% endif %}
 {% endblock %}

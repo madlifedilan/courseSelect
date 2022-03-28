@@ -89,7 +89,10 @@ def reg(request):
         new_score = Score.objects.create(scoreCourse=cname, score_date=score,
                                          scoreStudent_id=idid, scoreCredit=ccredit)
         new_score.save()
-        return render(request, 'login/reg_score.html')
+        context = {
+            "student_inform_reg": student_inform_reg
+        }
+        return render(request, 'login/reg_score.html', context=context)
 
 
 def stu1(request):
@@ -204,7 +207,7 @@ def register(request):
                 new_user.password = password1
                 new_user.kind = kind
                 new_user.save()
-                if kind == 'teacher':
+                if kind == '教师':
                     new_tea = Teacher.objects.create(id_id=new_user.id)
                     new_tea.teacherName = real_name
                     new_tea.teacherID = id
@@ -227,6 +230,7 @@ def login(request):
     if request.method == "POST":
         login_form = UserForm(request.POST)
         message = "请检查填写的内容！"
+        # 检查表单
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
@@ -236,12 +240,8 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
-                    if user.kind == '教师':
-                        return redirect('/index_t/')
-                    if user.kind == '管理员':
-                        return redirect('/index_a/')
-                    else:
-                        return redirect('/index_s/')
+                    request.session['user_kind'] = user.kind
+                    return redirect('app:index_s')
                 else:
                     message = "密码不正确！"
             except:
@@ -278,3 +278,7 @@ def update(request):
                 teacher = Teacher.objects.update_or_create(id_id=user[0].id, teacherName=i, teacherID=i)
                 course[0].courseTeacher.add(teacher[0])
     pass
+
+
+def base(request):
+    return render(request, 'base.html')

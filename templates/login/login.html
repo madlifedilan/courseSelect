@@ -1,42 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script nonce="7b32b071-8a44-4011-81d1-d14413975ebe">(function(w,d){!function(a,e,t,r){a.zarazData=a.zarazData||{},a.zarazData.executed=[],a.zarazData.tracks=[],a.zaraz={deferred:[]},a.zaraz.track=(e,t)=>{for(key in a.zarazData.tracks.push(e),t)a.zarazData["z_"+key]=t[key]},a.zaraz._preSet=[],a.zaraz.set=(e,t,r)=>{a.zarazData["z_"+e]=t,a.zaraz._preSet.push([e,t,r])},a.addEventListener("DOMContentLoaded",(()=>{var t=e.getElementsByTagName(r)[0],z=e.createElement(r),n=e.getElementsByTagName("title")[0];n&&(a.zarazData.t=e.getElementsByTagName("title")[0].text),a.zarazData.w=a.screen.width,a.zarazData.h=a.screen.height,a.zarazData.j=a.innerHeight,a.zarazData.e=a.innerWidth,a.zarazData.l=a.location.href,a.zarazData.r=e.referrer,a.zarazData.k=a.screen.colorDepth,a.zarazData.n=e.characterSet,a.zarazData.o=(new Date).getTimezoneOffset(),z.defer=!0,z.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(a.zarazData))),t.parentNode.insertBefore(z,t)}))}(w,d,0,"script");})(window,document);</script>
 <meta charset="utf-8">
-{% extends 'login/../base.html' %}
-{% load static %}
-{% block title %}登录{% endblock %}
-{% block css %}<link href="{% static 'css/login.css' %}" rel="stylesheet"/>
-    <style>
-    body{
-        background:url("../../../static/img/006.jpg")no-repeat center center fixed;
-        background-size:100%;
-        height: 400px;
-        font-size: 18px;
-    }
-    </style>
-{% endblock %}
-{% block content %}
-    <div class="container">
-        <div class="col-md-4 col-md-offset-4">
-          <form class='form-login' action="/login/" method="post">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-              {% if message %}
-                  <div class="alert alert-warning">{{ message }}</div>
-              {% endif %}
-              {% csrf_token %}
-              <h2 class="text-center">欢迎登录</h2>
+<title>Sakura | Log in</title>
 
-                {{ login_form.name_of_field }}
-                <div class="form-group">
-                {{ login_form.username.label_tag }}
-                {{ login_form.username}}
-                </div>
-                <div class="form-group">
-                {{ login_form.password.label_tag }}
-                {{ login_form.password }}
-                </div>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-              <button type="reset" class="btn btn-default pull-left">重置</button>
-              <button type="submit" class="btn btn-primary pull-right">提交</button>
+<link rel="stylesheet" href="{% static "adminLTE/plugins/fontawesome-free/css/all.min.css"%}" >
 
-          </form>
+<link rel="stylesheet" href="{% static "adminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css"%}">
+
+<link rel="stylesheet" href="{% static "adminLTE/dist/css/adminlte.min.css"%}">
+</head>
+<body class="hold-transition login-page">
+
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="login-logo">
+            <a href="../"><b>Admin</b>用户管理系统</a>
         </div>
-    </div> <!-- /container -->
-{% endblock %}
+        <div class="card ">
+
+            <div class="card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <form action="{% url 'app:login' %}" method="post">
+                    {% if message %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">{{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Username" name="username">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password" name="password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+
+                <p class="mb-1">
+                    <a href="forgot-password.html">I forgot my password</a>
+                </p>
+                <p class="mb-0">
+                    <a href="{% url "app:register" %}" class="text-center">Register a new membership</a>
+                </p>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    <!-- jQuery -->
+
+    </div>
+<!-- jQuery -->
+<script src="{% static 'adminLTE/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static "adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static "adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+</body>
+    <!-- /.login-box -->
+
+

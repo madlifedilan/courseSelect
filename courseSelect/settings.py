@@ -67,6 +67,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins': [
+                'django.templatetags.static'
+            ]
         },
     },
 ]
@@ -82,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'courseselect',
         'USER': 'root',
-        'PASSWORD': 'password',
+        'PASSWORD': '021204',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

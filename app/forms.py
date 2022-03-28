@@ -8,8 +8,8 @@ class UserForm(forms.Form):
 
 class RegisterForm(forms.Form):
     attribute = (
-        ('teacher', '教师'),
-        ('student', '学生'),
+        ('教师', 'teacher'),
+        ('学生', 'student'),
     )
     username = forms.CharField(label="用户名", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(label="密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
