@@ -1,60 +1,40 @@
 {% extends 'base.html' %}
 {% block title %}选课{% endblock %}
 {% block content %}
-    {% if request.session.is_login %}
-        <!-- Content Header (Page header) -->
-        <div class="content-wrapper" style="min-height:auto;">
-            <section class="container-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">选课界面</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">stu1</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-
-            </section>
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <!-- card-header -->
-                                <div class="card-header">
-                                    <h3 class="card-title">班级学生名单</h3>
-                                    <div class="card-tools">
-                                    </div>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap">
-                                        {% csrf_token %}
-                                        <thead>
-                                        <tr>
-                                            <th>课程号</th>
-                                            <th>课序号</th>
-                                            <th>课程名</th>
-                                            <th>授课老师</th>
-
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">选课页面</h3>
+                            {% csrf_token %}
+                        </div>
+                        <div class="card-body">
+                            <table id="courseSelect" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>课程代号</th>
+                                    <th>课程名称</th>
+                                    <th>课程学分</th>
+                                    <th>授课教师</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for course in course_inform %}
+                                    <tr>
+                                        <td>{{ course.id }}</td>
+                                        <td>{{ course.courseName }}</td>
+                                        <td>{{ course.courseCredit }}</td>
+                                        <td>{{ course.courseTeacher.teacherName }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-    {% else %}  <h1>你尚未登录，只能访问公开内容！</h1>
-    {% endif %}
+    </section>
 {% endblock %}
