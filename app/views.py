@@ -96,19 +96,21 @@ def reg(request):
 
 
 def stu1(request):
+    # 先把所有课程给获取了
     studentID = request.session['user_id']
+    course_inform = Course.objects.all()
+    context = {
+        "course_inform": course_inform,
+    }
+
     if request.method == "GET":
-        course_inform = Course.objects.all()
-        context = {
-            "course_inform": course_inform,
-        }
         return render(request, 'login/stu1.html', context=context)
     else:
         course_add_id = request.POST.get("course_add_id")
         student_obj = Student.objects.get(id=studentID)
         course_obj = Course.objects.get(id=course_add_id)
         course_obj.courseStudent.add(student_obj)
-        return render(request, 'login/stu1.html')
+        return render(request, 'login/stu1.html', context=context)
 
 
 def stu2(request):
