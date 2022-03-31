@@ -64,13 +64,13 @@
                         <span class="dropdown-item dropdown-header">当前在线：{{ request.session.user_name }} {{ request.session.user_kind }}</span>
                         <div class="dropdown-divider"></div>
                         <a href="{% url 'app:logout' %}" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
+                            <i class="fas fa-envelope mr-2"></i> 退出
+                            <span class="float-right text-muted text-sm">登录</span>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
+                            <i class="fas fa-users mr-2"></i> 还没
+                            <span class="float-right text-muted text-sm">写完</span>
                         </a>
                     {% else %}
                         <a href="{% url 'app:login' %}" class="dropdown-item">
