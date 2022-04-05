@@ -12,6 +12,7 @@ def cms_dashboard(request):
     context = {}
     context.update(get_dashboard_visitor_ip_table())
     context.update(get_dashboard_top_data())
+    context.update(get_dashboard_visitor_chart())
     return render(request, 'cms/dashboard.html', context=context)
 
 
