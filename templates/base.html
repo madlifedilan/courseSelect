@@ -222,6 +222,40 @@
                                 </p>
                             </a>
                         </li>
+                    {% elif request.session.user_kind == '管理员'%}
+                    <li class="nav-item has-treeview ">
+                    <a href="#"
+                       class="nav-link ">
+                        <i class="nav-icon fas fa-desktop"></i>
+                        <p>
+                            Monitor
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{% url 'user:userip'%}"
+                               class="nav-link ">
+                                <i class="far fa-address-book nav-icon"></i>
+                                <p>User IP</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/cms/dashboard/monitor/banuser"
+                               class="nav-link ">
+                                <i class="far fa-times-circle nav-icon"></i>
+                                <p>Ban User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/cms/dashboard/monitor/postview"
+                               class="nav-link ">
+                                <i class="fas fa-eye nav-icon"></i>
+                                <p>Post View</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                     {% endif %}
                 </ul>
             </nav>

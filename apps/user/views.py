@@ -310,3 +310,6 @@ def update(request):
 
 def base(request):
     return render(request, 'base.html')
+
+def userip(request):
+    return render(request,'login/userip.html')
