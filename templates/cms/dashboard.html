@@ -94,65 +94,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <script>
-                                    $(document).ready(function () {
-                                        var ticksStyle = {
-                                            fontColor: '#495057',
-                                            fontStyle: 'bold'
-                                        }
-                                        var $visitorsChart = $('#visitors-chart')
-                                        var visitorsChart2 = new Chart($visitorsChart, {
-                                            data: {
-                                                labels: [30, 31, 1, 2, 3, 4, 5],
-                                                datasets: [{
-                                                    type: 'line',
-                                                    data: [108, 152, 106, 134, 87, 132, 58],
-                                                    backgroundColor: 'transparent',
-                                                    borderColor: '#007bff',
-                                                    pointBorderColor: '#007bff',
-                                                    pointBackgroundColor: '#007bff',
-                                                    fill: true
-                                                }]
-                                            },
-                                            options: {
-                                                maintainAspectRatio: false,
-                                                tooltips: {
-                                                    mode: 'index',
-                                                    intersect: true
-                                                },
-                                                hover: {
-                                                    mode: 'index',
-                                                    intersect: true
-                                                },
-                                                legend: {
-                                                    display: false
-                                                },
-                                                scales: {
-                                                    yAxes: [{
-                                                        // display: false,
-                                                        gridLines: {
-                                                            display: true,
-                                                            lineWidth: '4px',
-                                                            color: 'rgba(0, 0, 0, .2)',
-                                                            zeroLineColor: 'transparent'
-                                                        },
-                                                        ticks: $.extend({
-                                                            beginAtZero: false,
-                                                            suggestedMax: 152
-                                                        }, ticksStyle)
-                                                    }],
-                                                    xAxes: [{
-                                                        display: true,
-                                                        gridLines: {
-                                                            display: false
-                                                        },
-                                                        ticks: ticksStyle
-                                                    }]
-                                                }
-                                            }
-                                        })
-                                    })
-                                </script>
+
+
                             </div>
                         </div>
                     </div>

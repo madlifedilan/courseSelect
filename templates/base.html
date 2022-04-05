@@ -222,40 +222,40 @@
                                 </p>
                             </a>
                         </li>
-                    {% elif request.session.user_kind == '管理员'%}
-                    <li class="nav-item has-treeview ">
-                    <a href="#"
-                       class="nav-link ">
-                        <i class="nav-icon fas fa-desktop"></i>
-                        <p>
-                            Monitor
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{% url 'user:userip'%}"
+                    {% elif request.session.user_kind == '管理员' %}
+                        <li class="nav-item has-treeview ">
+                            <a href="#"
                                class="nav-link ">
-                                <i class="far fa-address-book nav-icon"></i>
-                                <p>User IP</p>
+                                <i class="nav-icon fas fa-desktop"></i>
+                                <p>
+                                    Monitor
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{% url 'user:userip' %}"
+                                       class="nav-link ">
+                                        <i class="far fa-address-book nav-icon"></i>
+                                        <p>User IP</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/cms/dashboard/monitor/banuser"
+                                       class="nav-link ">
+                                        <i class="far fa-times-circle nav-icon"></i>
+                                        <p>Ban User</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/cms/dashboard/monitor/postview"
+                                       class="nav-link ">
+                                        <i class="fas fa-eye nav-icon"></i>
+                                        <p>Post View</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="/cms/dashboard/monitor/banuser"
-                               class="nav-link ">
-                                <i class="far fa-times-circle nav-icon"></i>
-                                <p>Ban User</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/cms/dashboard/monitor/postview"
-                               class="nav-link ">
-                                <i class="fas fa-eye nav-icon"></i>
-                                <p>Post View</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
                     {% endif %}
                 </ul>
             </nav>
@@ -287,18 +287,20 @@
 <!-- AdminLTE App -->
 <script src="{% static 'adminLTE/dist/js/adminlte.min.js' %}"></script>
 <!-- DataTables  & Plugins -->
-<script src="{% static 'adminLTE/plugins/datatables/jquery.dataTables.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/jszip/jszip.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/pdfmake/pdfmake.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/pdfmake/vfs_fonts.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.html5.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.print.min.js'%}"></script>
-<script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js'%}"></script>
+<script src="{% static 'adminLTE/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<!-- ChartJS -->
+<script src="{% static 'adminlte/plugins/chart.js/Chart.min.js' %}"></script>
 <script>
     $(function () {
         $('#courseSelect').DataTable({
@@ -370,6 +372,67 @@
             }
         })
     })
+
+
+    $(document).ready(function () {
+        var ticksStyle = {
+            fontColor: '#495057',
+            fontStyle: 'bold'
+        }
+        var $visitorsChart = $('#visitors-chart')
+        var visitorsChart2 = new Chart($visitorsChart, {
+            data: {
+                labels: {{ date_time_list }},
+                datasets: [{
+                    type: 'line',
+                    data: {{ week_data_list }},
+                    backgroundColor: 'transparent',
+                    borderColor: '#007bff',
+                    pointBorderColor: '#007bff',
+                    pointBackgroundColor: '#007bff',
+                    fill: true
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                },
+                hover: {
+                    mode: 'index',
+                    intersect: true
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        // display: false,
+                        gridLines: {
+                            display: true,
+                            lineWidth: '4px',
+                            color: 'rgba(0, 0, 0, .2)',
+                            zeroLineColor: 'transparent'
+                        },
+                        ticks: $.extend({
+                            beginAtZero: false,
+                            suggestedMax: {{ suggested_max }}
+                        }, ticksStyle)
+                    }],
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: ticksStyle
+                    }]
+                }
+            }
+        })
+    })
+
+
 </script>
 </body>
 
