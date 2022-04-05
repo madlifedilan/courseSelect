@@ -21,7 +21,7 @@
             <a href="../"><b>Admin</b>用户管理系统</a>
         </div>
         <div class="card">
-            <form action="{% url 'app:register' %}" method="post">
+            <form action="{% url 'user:register' %}" method="post">
 
                 {% if message %}
                     <div class="alert alert-warning">{{ message }}</div>
@@ -59,6 +59,7 @@
                         <select type="text" class="form-control" name="kind">
                             <option value="教师">teacher</option>
                             <option value="学生">student</option>
+                            <option value="管理员">superuser</option>
                         </select>
                         <div class="input-group-append">
                             <div class="input-group-text">

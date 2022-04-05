@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Course, Teacher, Student, User, Score
+from .models import Course, Teacher, Student, User, Score, Admin
 from .forms import UserForm, RegisterForm
+from apps.base.tracking_view import web_tracking
 
 course_reg_id = 0
 student_inform_reg = []
@@ -157,6 +158,7 @@ def stu3(request):
     }
     return render(request, 'login/stu3.html', context=context)
 
+
 def stu4(request):
     global course_inform_check
     course_inform_check = []
@@ -233,17 +235,22 @@ def register(request):
                     new_tea.teacherName = real_name
                     new_tea.teacherID = id
                     new_tea.save()
-                else:
+                elif kind == '学生':
                     new_stu = Student.objects.create(id_id=new_user.id)
                     new_stu.id_id = new_user.id
                     new_stu.studentName = real_name
                     new_stu.studentID = id
                     new_stu.save()
+                else:
+                    new_su = Admin.objects.create(id_id=new_user.id)
+                    new_su.id_id = new_user.id
+                    new_su.save()
                 return redirect('/login/')  # 自动跳转到登录页面
     register_form = RegisterForm()
     return render(request, 'login/register.html', locals())
 
 
+@web_tracking
 def login(request):
     if request.session.get('is_login', None):
         return redirect('/index')
@@ -262,7 +269,7 @@ def login(request):
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
                     request.session['user_kind'] = user.kind
-                    return redirect('app:index_s')
+                    return redirect('user:index_s')
                 else:
                     message = "密码不正确！"
             except:
