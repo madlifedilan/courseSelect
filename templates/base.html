@@ -26,7 +26,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{% url 'app:index' %}" class="nav-link">Home</a>
+                <a href="{% url 'user:index' %}" class="nav-link">Home</a>
             </li>
         </ul>
         {#/.Left navbar links#}
@@ -63,7 +63,7 @@
                     {% if request.session.is_login %}
                         <span class="dropdown-item dropdown-header">当前在线：{{ request.session.user_name }} {{ request.session.user_kind }}</span>
                         <div class="dropdown-divider"></div>
-                        <a href="{% url 'app:logout' %}" class="dropdown-item">
+                        <a href="{% url 'user:logout' %}" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i> 退出
                             <span class="float-right text-muted text-sm">登录</span>
                         </a>
@@ -73,12 +73,12 @@
                             <span class="float-right text-muted text-sm">写完</span>
                         </a>
                     {% else %}
-                        <a href="{% url 'app:login' %}" class="dropdown-item">
+                        <a href="{% url 'user:login' %}" class="dropdown-item">
                             <i class="fas fa-envelope mr-2"></i>
                             <span class="float-right text-muted text-sm">登录</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="{% url 'app:register' %}" class="dropdown-item">
+                        <a href="{% url 'user:register' %}" class="dropdown-item">
                             <i class="fas fa-users mr-2"></i>
                             <span class="float-right text-muted text-sm">注册</span>
                         </a>
@@ -167,7 +167,7 @@
                     {#teacher#}
                     {% if request.session.user_kind == '教师' %}
                         <li class="nav-item">
-                            <a href="{% url 'app:tea1' %}" class="nav-link">
+                            <a href="{% url 'user:tea1' %}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     tea1
@@ -176,7 +176,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'app:tea2' %}" class="nav-link">
+                            <a href="{% url 'user:tea2' %}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     tea2
@@ -187,7 +187,7 @@
                         {#/.teacher#}
                     {% elif request.session.user_kind == '学生' %}
                         <li class="nav-item">
-                            <a href="{% url 'app:stu1' %}" class="nav-link">
+                            <a href="{% url 'user:stu1' %}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     stu1
@@ -196,7 +196,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'app:stu2' %}" class="nav-link">
+                            <a href="{% url 'user:stu2' %}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     stu2
@@ -205,7 +205,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'app:stu3' %}" class="nav-link">
+                            <a href="{% url 'user:stu3' %}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     stu3
@@ -214,7 +214,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'app:stu4' %}" class="nav-link">
+                            <a href="{% url 'user:stu4' %}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     stu4

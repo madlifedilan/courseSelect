@@ -33,17 +33,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="my-nav">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="{% url 'app:index_a' %}">主页</a></li>
-            <li class="active"><a href="{% url 'app:adm1' %}">分配地址</a></li>
-            <li class="active"><a href="{% url 'app:adm2' %}">学分上链</a></li>
+            <li class="active"><a href="{% url 'user:index_a' %}">主页</a></li>
+            <li class="active"><a href="{% url 'user:adm1' %}">分配地址</a></li>
+            <li class="active"><a href="{% url 'user:adm2' %}">学分上链</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.is_login %}
                   <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
-                  <li><a href="{% url 'app:logout' %}">退出登录</a></li>
+                  <li><a href="{% url 'user:logout' %}">退出登录</a></li>
               {% else %}
-                  <li><a href="{% url 'app:login' %}">登录</a></li>
-                  <li><a href="{% url 'app:register' %}">注册</a></li>
+                  <li><a href="{% url 'user:login' %}">登录</a></li>
+                  <li><a href="{% url 'user:register' %}">注册</a></li>
               {% endif %}
           </ul>
         </div><!-- /.navbar-collapse -->
