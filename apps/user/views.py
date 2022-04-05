@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Course, Teacher, Student, User, Score
 from .forms import UserForm, RegisterForm
+from apps.base.tracking_view import web_tracking
 
 course_reg_id = 0
 student_inform_reg = []
@@ -157,6 +158,7 @@ def stu3(request):
     }
     return render(request, 'login/stu3.html', context=context)
 
+
 def stu4(request):
     global course_inform_check
     course_inform_check = []
@@ -244,6 +246,7 @@ def register(request):
     return render(request, 'login/register.html', locals())
 
 
+@web_tracking
 def login(request):
     if request.session.get('is_login', None):
         return redirect('/index')
