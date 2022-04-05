@@ -18,6 +18,7 @@ urlpatterns = [
     path('stu1/', views.stu1, name='stu1'),
     path('stu2/', views.stu2, name='stu2'),
     path('stu3/', views.stu3, name='stu3'),
+    path('stu4/', views.stu4, name='stu4'),
     path('adm1/', views.adm1, name='adm1'),
     path('adm2/', views.adm2, name='adm2'),
     path('update/', views.update, name='update'),

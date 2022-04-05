@@ -157,6 +157,25 @@ def stu3(request):
     }
     return render(request, 'login/stu3.html', context=context)
 
+def stu4(request):
+    global course_inform_check
+    course_inform_check = []
+    inform2 = []
+    student = request.session['user_id']
+    inform = Course.objects.filter(courseStudent__id=student)
+    for c in inform:
+        cid = c.id
+        inform2.append(cid)
+    for c in inform2:
+        obj = Course.objects.get(id=c)
+        course_inform_check.append(obj)
+    score_inform = Score.objects.filter(scoreStudent_id=student)
+    context = {
+        "course_inform_check": course_inform_check,
+        "score_inform": score_inform
+    }
+    return render(request, 'login/stu4.html', context=context)
+
 
 def adm1(request):
     if request.method == "GET":
