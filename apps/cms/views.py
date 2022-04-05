@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.shortcuts import render
 from django.utils import timezone
+import datetime
+
 
 from apps.basefunction.models import VisitNumber, DayNumber, UserIP
 from django.core.paginator import Paginator
@@ -42,3 +44,36 @@ def get_dashboard_top_data():
         "total_visit_num": total_visit_num
     }
     return context
+
+
+
+
+def get_dashboard_visitor_chart():
+    days_list = []
+    visit_list = []
+    max_num = 0
+    week_total_num = 0
+    day_visit_num = 0
+    for index in range(6, -1, -1):
+        day, format_date = get_before_date(index)
+        days_list.append(int(day))
+        daynumber_item = DayNumber.objects.filter(day=format_date)
+        if daynumber_item:
+            day_visit_num = daynumber_item[0].count
+        visit_list.append(day_visit_num)
+        week_total_num += day_visit_num
+        max_num = day_visit_num if day_visit_num > max_num else max_num
+    context = {
+        'visit_week_total_number': day_visit_num,
+        'date_time_list': days_list,
+        'week_data_list': visit_list,
+        'suggested_max': max_num
+    }
+    return context
+
+def get_before_date(day):
+    today = datetime.datetime.now()
+    offset = datetime.timedelta(days=-day)
+    re_day = (today + offset).strftime("%d")
+    re_date = (today + offset).strftime("%Y-%m-%d")
+    return re_day, re_date
