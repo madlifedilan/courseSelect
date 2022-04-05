@@ -22,5 +22,6 @@ from apps.user import views
 urlpatterns = [
     path('', views.index),
     path('', include('apps.user.urls')),
+    path('', include('apps.cms.urls')),
     path('admin/', admin.site.urls),
 ]
