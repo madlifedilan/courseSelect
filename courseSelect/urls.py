@@ -24,5 +24,6 @@ urlpatterns = [
     path('', include('apps.user.urls')),
     path('', include('apps.cms.urls')),
     path('admin/', admin.site.urls),
-    path('',include('apps.poster.urls')),
+    path('', include('apps.poster.urls')),
+    path('captcha/', include('captcha.urls')),
 ]

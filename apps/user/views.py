@@ -303,7 +303,7 @@ def logout(request):
 
 def update(request):
     import pandas as pd
-    filepath = "C:/Users/home/Desktop/data/course1.xlsx"
+    filepath = "C:/Users/taxus chinensis/Desktop/course1.xlsx"
     data = pd.read_excel(filepath)
     dataDict = data.values
     for row in dataDict:

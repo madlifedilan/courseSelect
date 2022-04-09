@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.poster',
     'apps.basefunction',
     'django_extensions',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -87,10 +88,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'courseselect',
-        'USER': 'root',
-        'PASSWORD': '021204',
+        'USER': 'chenchen',
+        'PASSWORD': '021212',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'PORT': '3305',
     }
 }
 
