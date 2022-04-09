@@ -6,6 +6,7 @@ from courseSelect import settings
 from .models import Course, Teacher, Student, User, Score, Admin
 from .forms import UserForm, RegisterForm
 from apps.base.tracking_view import web_tracking
+from apps.questions.view import isCraw
 
 course_reg_id = 0
 student_inform_reg = []
@@ -99,6 +100,8 @@ def reg(request):
         }
         return render(request, 'login/reg_score.html', context=context)
 
+
+@isCraw
 @web_tracking
 def stu1(request):
     # 先把所有课程给获取了
@@ -259,6 +262,7 @@ def register(request):
     return render(request, 'login/register.html', locals())
 
 
+@isCraw
 @web_tracking
 def login(request):
     if request.session.get('is_login', None):
@@ -319,4 +323,3 @@ def update(request):
 
 def base(request):
     return render(request, 'base.html')
-
