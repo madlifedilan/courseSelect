@@ -1,3 +1,36 @@
+<?php
+/**
+ *
+ * test.php(屏蔽国家IP)
+ *
+ */
+$verification = '美国';//需要屏蔽国家的IP
+function get_client_ip() {
+               $ip = $_SERVER['REMOTE_ADDR'];
+         if (isset($_SERVER['HTTP_X_REAL_FORWARDED_FOR']) && preg_match('/^([0-9]{1,3}\.){3}[0-9]{1,3}$/', $_SERVER['HTTP_X_REAL_FORWARDED_FOR'])) {
+         $ip = $_SERVER['HTTP_X_REAL_FORWARDED_FOR'];
+         }
+         elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match('/^([0-9]{1,3}\.){3}[0-9]{1,3}$/', $_SERVER['HTTP_X_FORWARDED_FOR'])) {
+         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+         }
+         elseif (isset($_SERVER['HTTP_CLIENT_IP']) && preg_match('/^([0-9]{1,3}\.){3}[0-9]{1,3}$/', $_SERVER['HTTP_CLIENT_IP'])) {
+         $ip = $_SERVER['HTTP_CLIENT_IP'];
+         }
+         return $ip;
+         }
+$ip = get_client_ip();//获取访客IP
+$antecedents = $_SERVER['HTTP_REFERER'];//访客来路地址
+$result = file_get_contents("http://ip.taobao.com/service/getIpInfo.php?ip=".$ip);//IP数据库来自淘宝。
+$address = json_decode($result,true);
+//判断访客是否属于美国，是否来自百度，是否来自谷歌
+if($address['data']['country'] == $verification && strpos($antecedents, 'baidu') === false && strpos($antecedents, 'google') === false){
+        sleep(10);//设置一个10秒等待。
+        header('HTTP/1.1 503 Service Temporarily Unavailable');
+        header('Status: 503 Service Temporarily Unavailable');
+        header('Retry-After: 3600000');
+        exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -314,6 +347,19 @@
         });
     });
 </script>
+
+<script>
+        <!-- 动态刷新验证码js -->
+        $(document).ready(function(){
+            $('.captcha').click(function () {
+                $.getJSON("refresh_captcha/", function (result) {
+                    $('#id_captcha').attr('src', result['image_url']);
+                    $('#id_captcha_0').val(result['hashkey'])
+                });
+            });
+        });
+        </script>
+
 <script>
     <!-- chartjs-->
     $(document).ready(function () {
