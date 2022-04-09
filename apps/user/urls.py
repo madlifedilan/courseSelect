@@ -23,5 +23,5 @@ urlpatterns = [
     path('adm2/', views.adm2, name='adm2'),
     path('update/', views.update, name='update'),
     path('base/', views.base, name='base'),
-    path('userip/', views.userip, name='userip'),
+
 ]

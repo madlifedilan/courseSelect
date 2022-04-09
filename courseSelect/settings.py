@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.user',
     'apps.cms',
+    'apps.poster',
     'apps.basefunction',
     'django_extensions',
 ]
@@ -87,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'courseselect',
         'USER': 'root',
-        'PASSWORD': '12345678',
+        'PASSWORD': '021204',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -123,7 +124,7 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 
 USE_TZ = True
-
+ONE_PAGE_NEWS_COUNT = 10
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

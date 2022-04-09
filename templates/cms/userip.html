@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load post_filters %}
 {% block content %}
     {% if request.session.is_login %}
         <!-- Content Wrapper. Contains page content -->
@@ -13,7 +14,8 @@
                                     <div class="row p-2 d-flex">
                                         <p class="h3">User IP</p>
                                         <div class="ml-auto">
-                                            2022年4月5日 <b class="text-danger">Total: 57</b>
+                                            {{ day_time | datetime_timezone_format }} <b
+                                                class="text-danger">Total: {{ ip_count_num }}</b>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -29,370 +31,96 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>106.11.159.9</td>
-                                                <td>中国.浙江.杭州</td>
-                                                <td>/detail/202006100000/</td>
-                                                <td>2022/04/05 15:58:49</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93749">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>2</td>
-                                                <td>211.83.127.58</td>
-                                                <td>中国.四川.成都</td>
-                                                <td>/list/</td>
-                                                <td>2022/04/05 15:31:38</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93748">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>3</td>
-                                                <td>211.83.127.58</td>
-                                                <td>中国.四川.成都</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 15:31:36</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93747">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>4</td>
-                                                <td>211.83.127.58</td>
-                                                <td>中国.四川.成都</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 15:31:33</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93746">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>5</td>
-                                                <td>106.84.34.15</td>
-                                                <td>中国.重庆.重庆</td>
-                                                <td>/detail/202008174427/</td>
-                                                <td>2022/04/05 14:39:55</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93745">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>6</td>
-                                                <td>106.84.34.15</td>
-                                                <td>中国.重庆.重庆</td>
-                                                <td>/list/</td>
-                                                <td>2022/04/05 14:39:42</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93744">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>7</td>
-                                                <td>106.84.34.15</td>
-                                                <td>中国.重庆.重庆</td>
-                                                <td>/detail/202006154210/</td>
-                                                <td>2022/04/05 14:39:19</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93743">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>8</td>
-                                                <td>106.84.34.15</td>
-                                                <td>中国.重庆.重庆</td>
-                                                <td>/detail/202006110000/</td>
-                                                <td>2022/04/05 14:39:07</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93742">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>9</td>
-                                                <td>106.84.34.15</td>
-                                                <td>中国.重庆.重庆</td>
-                                                <td>/detail/202006238852/</td>
-                                                <td>2022/04/05 14:38:03</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93741">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>10</td>
-                                                <td>106.84.34.15</td>
-                                                <td>中国.重庆.重庆</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 14:37:13</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93740">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>11</td>
-                                                <td>193.118.53.202</td>
-                                                <td>荷兰.阿姆斯特丹.阿姆斯特丹</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 14:26:11</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93739">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>12</td>
-                                                <td>159.223.18.171</td>
-                                                <td>美国.XX.XX</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 14:21:48</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93738">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>13</td>
-                                                <td>115.144.69.135</td>
-                                                <td>韩国.XX.XX</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 14:17:55</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93737">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>14</td>
-                                                <td>71.6.232.7</td>
-                                                <td>美国.加利福尼亚.圣地亚哥</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 14:05:20</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93736">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>15</td>
-                                                <td>106.75.246.50</td>
-                                                <td>中国.山东.济南</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 13:09:44</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93735">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>16</td>
-                                                <td>114.119.136.190</td>
-                                                <td>中国.广东.深圳</td>
-                                                <td>/detail/202006238852/</td>
-                                                <td>2022/04/05 12:52:19</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93734">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>17</td>
-                                                <td>40.77.167.40</td>
-                                                <td>美国.XX.XX</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 12:45:09</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93733">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>18</td>
-                                                <td>2.224.244.111</td>
-                                                <td>意大利.XX.XX</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 12:19:53</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93732">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>19</td>
-                                                <td>66.249.66.60</td>
-                                                <td>美国.XX.XX</td>
-                                                <td>/detail/202006220295/</td>
-                                                <td>2022/04/05 12:16:58</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93731">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>20</td>
-                                                <td>156.146.50.169</td>
-                                                <td>美国.XX.XX</td>
-                                                <td>/</td>
-                                                <td>2022/04/05 12:14:56</td>
-                                                <td>
-                                                    <a href="#"
-                                                       class="btn btn-info btn-xs">TBA</a>
-                                                    <button class="btn btn-danger btn-xs delete-btn"
-                                                            data-post-id="93730">
-                                                        TBA
-                                                    </button>
-                                                </td>
-                                            </tr>
-
+                                            {% for item in list_data %}
+                                                <tr>
+                                                    <td>{{ forloop.counter|calculate_index:current_page }}</td>
+                                                    <td>{{ item.ip_address }}</td>
+                                                    <td>{{ item.ip_location }}</td>
+                                                    <td>{{ item.end_point }}</td>
+                                                    <td>{{ item.day | time_format }}</td>
+                                                    <td>
+                                                        <a href="#"
+                                                           class="btn btn-info btn-xs">TBA</a>
+                                                        <button class="btn btn-danger btn-xs delete-btn"
+                                                                data-post-id="{{ item.id }}">
+                                                            TBA
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-sm-5">
-                                            <p class="pull-left">第1页/总共4688页</p>
+                                            <p class="pull-left">第{{ current_page }}页/总共{{ num_pages }}页</p>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="dataTables_paginate paging_simple_numbers float-right">
                                                 <ul class="pagination">
+                                                    {#上一页#}
+                                                    {% if page_obj.has_previous %}
+                                                        <li class="paginate_button page-item "><a class="page-link"
+                                                                                                  href="?p=
+                                                        {{ page_obj.previous_page_number }}{{ url_query }}">上一页</a></li>
+                                                    {% else %}
+                                                        <li class="paginate_button page-item previous disabled"><a
+                                                                class="page-link"
+                                                                href="javascript:void(0);">上一页</a>
+                                                        </li>
+                                                    {% endif %}
 
+                                                    {# 是否需要出现三个点 #}
+                                                    {% if left_has_more %}
+                                                        <li class="paginate_button page-item "><a class="page-link"
+                                                                                                  href="?p=1">1</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item "><a class="page-link"
+                                                                                                  href="javascript:void(0);">...</a>
+                                                        </li>
+                                                    {% endif %}
 
-                                                    <li class="paginate_button page-item previous disabled"><a
-                                                            class="page-link"
-                                                            href="javascript:void(0);">上一页</a>
-                                                    </li>
+                                                    {# 左边的页码 #}
+                                                    {% for left_page in left_pages %}
+                                                        <li class="paginate_button page-item "><a class="page-link"
+                                                                                                  href="?p=
+                                                        {{ left_page }}{{ url_query }}">{{ left_page }}</a></li>
+                                                    {% endfor %}
 
-
+                                                    {# 当前的页面 #}
                                                     <li class="paginate_button page-item  active"><a class="page-link"
                                                                                                      href="?p=
-                                                    1">1</a></li>
+                                                    {{ current_page }}{{ url_query }}">{{ current_page }}</a></li>
 
+                                                    {# 右边的页码 #}
+                                                    {% for right_page in right_pages %}
+                                                        <li class="paginate_button page-item "><a class="page-link"
+                                                                                                  href="?p=
+                                                        {{ right_page }}{{ url_query }}">{{ right_page }}</a></li>
+                                                    {% endfor %}
 
-                                                    <li class="paginate_button page-item "><a class="page-link" href="?p=
-                                                        2">2</a></li>
+                                                    {# 用来控制右边三个点 #}
+                                                    {% if right_has_more %}
+                                                        <li class="paginate_button page-item "><a class="page-link"
+                                                                                                  href="javascript:void(0);">...</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item "><a class="page-link"
+                                                                                                  href="?p=
+                                                        {{ num_pages }}{{ url_query }}">{{ num_pages }}</a></li>
+                                                    {% endif %}
 
-                                                    <li class="paginate_button page-item "><a class="page-link" href="?p=
-                                                        3">3</a></li>
-
-
-                                                    <li class="paginate_button page-item "><a class="page-link"
-                                                                                              href="javascript:void(0);">...</a>
-                                                    </li>
-                                                    <li class="paginate_button page-item "><a class="page-link" href="?p=
-                                                        4688">4688</a></li>
-
-
-                                                    <li class="paginate_button page-item next disabled"><a
-                                                            class="page-link"
-                                                            href="javascript:void(0);">下一页</a>
-                                                    </li>
-
+                                                    {#下一页#}
+                                                    {% if page_obj.has_next %}
+                                                        <li class="paginate_button page-item next"><a class="page-link"
+                                                                                                      href="?p=
+                                                        {{ page_obj.next_page_number }}{{ url_query }}">下一页</a></li>
+                                                    {% else %}
+                                                        <li class="paginate_button page-item next disabled"><a
+                                                                class="page-link"
+                                                                href="javascript:void(0);">下一页</a>
+                                                        </li>
+                                                    {% endif %}
                                                 </ul>
                                             </div>
 
