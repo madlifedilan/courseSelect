@@ -35,6 +35,7 @@
                         </div>
                     {% endif %}
                     {% csrf_token %}
+
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Username" name="username">
                         <div class="input-group-append">
@@ -51,6 +52,11 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="input-group-text">{{ login_form.captcha }}
+                                <span class="fas fa-lock"></span>
+                            </div>
+
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
