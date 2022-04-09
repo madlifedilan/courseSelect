@@ -22,3 +22,5 @@ class RegisterForm(forms.Form):
     id = forms.CharField(label="学号/工号", max_length=128,
                          widget=forms.TextInput(attrs={'class': 'form-control'}))
     kind = forms.ChoiceField(label='用户类型', choices=attribute, )
+
+    captcha = CaptchaField(required=True, error_messages={'invalid': '验证码错误'})

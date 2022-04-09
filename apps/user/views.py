@@ -1,4 +1,5 @@
 from django.core import paginator
+from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from ratelimit.decorators import ratelimit
@@ -110,7 +111,10 @@ def stu1(request):
     # posts = Course.objects.all().order_by('courseID')
     # paginator = Paginator(posts, settings.ONE_PAGE_NEWS_COUNT)
     # page_obj = paginator.page(page)
-    course_inform = Course.objects.all()
+    course_inform = cache.get("course_inform")
+    if not course_inform:
+        course_inform = Course.objects.all()
+        cache.set("course_inform", course_inform, 60)
     context = {
         "course_inform": course_inform,
     }

@@ -19,7 +19,7 @@
                                            formmethod="post" class="form-control form-control-lg"
                                            placeholder="输入课程号">
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-lg btn-default">
+                                        <button type="submit" class="btn btn-lg btn-default" onclick="display()">
                                             选课
                                         </button>
                                     </div>
@@ -59,5 +59,10 @@
                 </div>
             </div>
         </div>
+    <script>
+        function display(){
+            alert("选课成功")
+        }
+    </script>
     </section>
 {% endblock %}
