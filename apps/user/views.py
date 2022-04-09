@@ -1,4 +1,8 @@
+from django.core import paginator
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
+
+from courseSelect import settings
 from .models import Course, Teacher, Student, User, Score, Admin
 from .forms import UserForm, RegisterForm
 from apps.base.tracking_view import web_tracking
@@ -99,6 +103,10 @@ def reg(request):
 def stu1(request):
     # 先把所有课程给获取了
     studentID = request.session['user_id']
+    # page = int(request.GET.get('p', 1))
+    # posts = Course.objects.all().order_by('courseID')
+    # paginator = Paginator(posts, settings.ONE_PAGE_NEWS_COUNT)
+    # page_obj = paginator.page(page)
     course_inform = Course.objects.all()
     context = {
         "course_inform": course_inform,
@@ -111,6 +119,7 @@ def stu1(request):
         student_obj = Student.objects.get(id=studentID)
         course_obj = Course.objects.get(id=course_add_id)
         course_obj.courseStudent.add(student_obj)
+
         return render(request, 'login/stu1.html', context=context)
 
 
@@ -310,5 +319,4 @@ def update(request):
 
 def base(request):
     return render(request, 'base.html')
-
 
