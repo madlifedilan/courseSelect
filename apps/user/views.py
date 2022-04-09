@@ -1,12 +1,12 @@
 from django.core import paginator
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
+from ratelimit.decorators import ratelimit
 
 from courseSelect import settings
 from .models import Course, Teacher, Student, User, Score, Admin
 from .forms import UserForm, RegisterForm
 from apps.base.tracking_view import web_tracking
-from apps.questions.view import isCraw
 
 course_reg_id = 0
 student_inform_reg = []
@@ -101,7 +101,7 @@ def reg(request):
         return render(request, 'login/reg_score.html', context=context)
 
 
-@isCraw
+@ratelimit(key='ip', rate='2/10s', block=True)
 @web_tracking
 def stu1(request):
     # 先把所有课程给获取了
@@ -262,7 +262,7 @@ def register(request):
     return render(request, 'login/register.html', locals())
 
 
-@isCraw
+@ratelimit(key='ip', rate='2/10s', block=True)
 @web_tracking
 def login(request):
     if request.session.get('is_login', None):
