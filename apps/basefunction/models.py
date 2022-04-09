@@ -7,7 +7,7 @@ class UserIP(models.Model):
     ip_address = models.CharField(max_length=30)
     ip_location = models.CharField(max_length=30)
     end_point = models.CharField(default='/', max_length=30)
-    day = models.DateField(default=timezone.now)
+    day = models.DateTimeField(default=timezone.now)
 
 
 # 网站总访问次数
