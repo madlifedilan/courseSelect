@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block title %}选课{% endblock %}
 {% block content %}
     <section class="content">
@@ -29,27 +30,32 @@
 
                     </div>
                     <div class="card-body">
-                        <table id="courseSelect" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>课程代号</th>
-                                <th>课程名称</th>
-                                <th>课程学分</th>
-                                <th>授课教师</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for course in course_inform %}
+
+                            <table id="courseSelect" class="table table-bordered table-hover">
+                                <thead>
                                 <tr>
-                                    <td>{{ course.id }}</td>
-                                    <td>{{ course.courseName }}</td>
-                                    <td>{{ course.courseCredit }}</td>
-                                    <td>{{ course.courseTeacher.teacherName }}</td>
+                                    <th>课程代号</th>
+                                    <th>课程名称</th>
+                                    <th>课程学分</th>
+                                    <th>授课教师</th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                {% for course in course_inform %}
+                                    <tr>
+                                        <td>{{ course.id }}</td>
+                                        <td>{{ course.courseName }}</td>
+                                        <td>{{ course.courseCredit }}</td>
+                                        <td>{{ course.courseTeacher.teacherName }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+
+
+                    </div><!--card body-->
+
                 </div>
             </div>
         </div>
