@@ -37,7 +37,7 @@ def update_user_ip(request):
     userIP_item.ip_address = client_ip
     userIP_item.ip_location = "TBA"
     userIP_item.end_point = request.path
-    userIP_item.day = timezone.now().date()
+    userIP_item.day = timezone.now()
     userIP_item.save()
 
 
