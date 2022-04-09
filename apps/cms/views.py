@@ -54,11 +54,11 @@ def get_dashboard_visitor_chart():
     visit_list = []
     max_num = 0
     week_total_num = 0
-    day_visit_num = 0
     for index in range(6, -1, -1):
         day, format_date = get_before_date(index)
         days_list.append(int(day))
         daynumber_item = DayNumber.objects.filter(day=format_date)
+        day_visit_num = 0
         if daynumber_item:
             day_visit_num = daynumber_item[0].count
         visit_list.append(day_visit_num)
