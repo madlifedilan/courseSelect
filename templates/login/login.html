@@ -50,7 +50,8 @@
                 {% csrf_token %}
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Username" name="username" required oninvalid="setCustomValidity('请输入用户名！');"  oninput="setCustomValidity('');"/>
+                    <input type="text" class="form-control" placeholder="Username" name="username" required
+                           oninvalid="setCustomValidity('请输入用户名！');" oninput="setCustomValidity('');"/>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -58,18 +59,19 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password" name="password" required oninvalid="setCustomValidity('请输入密码！');"  oninput="setCustomValidity('');"/>
+                    <input type="password" class="form-control" placeholder="Password" name="password" required
+                           oninvalid="setCustomValidity('请输入密码！');" oninput="setCustomValidity('');"/>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
                 </div>
-
-                <div class="input-group-text">
-                    {{ login_form.captcha }}
+                <div class="input-group mb-3">
+                    <div class="input-group-text">
+                        {{ login_form.captcha }}
+                    </div>
                 </div>
-
                 <div class="row">
                     <div class="col-8">
                         <div class="icheck-primary">

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-
+from utils.headers import HttpResponseCustomHeader
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-%%028ei_uqr3oum5_vdh&4@7u%&4q&ct#)l@5*ic_(b*0c9m3=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.0.0.2']
+ALLOWED_HOSTS = ['10.133.62.65',
+                 '127.0.0.1']
 
 # Application definition
 
@@ -52,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'utils.IpLimitMiddleware.IpLimitMiddleware',
+    'utils.headers.HttpResponseCustomHeader',
 ]
 
 ROOT_URLCONF = 'courseSelect.urls'
@@ -87,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'courseselect',
         'USER': 'root',
-        'PASSWORD': '12345678',
+        'PASSWORD': '021204',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -150,3 +151,7 @@ CACHES = {
 # session缓存
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+
+
+#验证码
+CAPTCHA_OUTPUT_FORMAT = '%(text_field)s %(hidden_field)s %(image)s'
