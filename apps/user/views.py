@@ -262,7 +262,7 @@ def register(request):
     return render(request, 'login/register.html', locals())
 
 
-@ratelimit(key='ip', rate='2/10s', block=True)
+# @ratelimit(key='ip', rate='2/10s', block=True)
 @web_tracking
 def login(request):
     if request.session.get('is_login', None):
