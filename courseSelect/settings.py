@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-%%028ei_uqr3oum5_vdh&4@7u%&4q&ct#)l@5*ic_(b*0c9m3=
 DEBUG = True
 
 ALLOWED_HOSTS = ['10.133.62.65',
-                 '127.0.0.1']
+                 '127.0.0.1',
+                 '10.0.0.2']
 
 # Application definition
 
@@ -88,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'courseselect',
         'USER': 'root',
-        'PASSWORD': '021204',
+        'PASSWORD': '12345678',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

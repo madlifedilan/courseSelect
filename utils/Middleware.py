@@ -35,4 +35,3 @@ class IpLimitMiddleware(MiddlewareMixin):
         print(len(requests))
         if len(requests) > 10:
             return HttpResponse("请求过于频繁，请稍后重试！")
-

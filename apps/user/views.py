@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from ratelimit.decorators import ratelimit
 
 from courseSelect import settings
-from .decorator import auth_permission_required,get_user
+from .decorator import auth_permission_required, get_user
 from .models import Course, Teacher, Student, User, Score, Admin
 from .forms import UserForm, RegisterForm
 from apps.base.tracking_view import web_tracking
@@ -271,8 +271,6 @@ def register(request):
 @ratelimit(key='ip', rate='2/10s', block=True)
 @web_tracking
 def login(request):
-
-
     if request.session.get('is_login', None):
         return redirect('/index')
 
@@ -281,8 +279,8 @@ def login(request):
                     'last_login_time': '', 'login_time': '', 'exp_time': ''}}
     if request.method == "POST":
         login_form = UserForm(request.POST)
-        message = "请检查填写的内容！"
         # 检查表单
+        message = ""
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
@@ -302,8 +300,10 @@ def login(request):
                     return redirect('user:index_s')
                 else:
                     message = "密码不正确！"
-            except:
+            except Exception as e:
+                print(e)
                 message = "用户不存在！"
+        message = login_form.errors
         return render(request, 'login/login.html', locals())
 
     login_form = UserForm()
@@ -320,7 +320,7 @@ def logout(request):
 
 def update(request):
     import pandas as pd
-    filepath = "C:/Users/Sakura/Desktop/course1.xlsx"
+    filepath = "C:/Users/home/Desktop/course1.xlsx"
     data = pd.read_excel(filepath)
     dataDict = data.values
     for row in dataDict:
