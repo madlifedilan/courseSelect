@@ -15,36 +15,9 @@ class User(models.Model):
     password = models.CharField(max_length=20)  # 用户密码
     kind = models.CharField(max_length=10, choices=attribute, default='学生')  # 用户属性 教师/学生
     c_time = models.DateTimeField(auto_now_add=True)
-    exp_time = models.DateTimeField(verbose_name='Token过期时间', auto_now=False, blank=True,
-                                    default=timezone.now() + timezone.timedelta(days=1))
-    login_time = models.DateTimeField(verbose_name='登录时间', auto_now=True, blank=True)
-    last_login_time = models.DateTimeField(verbose_name='上次登录时间', auto_now=False, blank=True,
-                                           default=timezone.now)
 
     def __str__(self):
         return self.name
-
-    @property
-    def token(self):
-        return self._generate_jwt_token()
-
-    def _generate_jwt_token(self):
-        exp = timezone.now() + timezone.timedelta(days=1)
-        token = jwt.encode({
-            'exp': exp,
-            'iat': timezone.now(),
-            'data': {
-                'username': self.name
-            }
-        }, settings.SECRET_KEY, algorithm='HS256')
-        lt = self.login_time
-        nt = timezone.now()
-        self.exp_time = exp
-        self.last_login_time = lt
-        self.login_time = nt
-        self.save()
-        print(type(token))
-        return token
 
     class Meta:
         ordering = ['c_time']

@@ -1,11 +1,6 @@
-from django.core import paginator
 from django.core.cache import cache
-from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from ratelimit.decorators import ratelimit
-
-from courseSelect import settings
-from .decorator import auth_permission_required, get_user
 from .models import Course, Teacher, Student, User, Score, Admin
 from .forms import UserForm, RegisterForm
 from apps.base.tracking_view import web_tracking
@@ -105,7 +100,6 @@ def reg(request):
 
 @ratelimit(key='ip', rate='2/10s', block=True)
 @web_tracking
-@auth_permission_required('account.select_course')
 def stu1(request):
     # 先把所有课程给获取了
     studentID = request.session['user_id']
@@ -274,9 +268,6 @@ def login(request):
     if request.session.get('is_login', None):
         return redirect('/index')
 
-    res = {'status': 1, 'err': '',
-           'data': {'is_success': False, "token": "",
-                    'last_login_time': '', 'login_time': '', 'exp_time': ''}}
     if request.method == "POST":
         login_form = UserForm(request.POST)
         # 检查表单
@@ -291,12 +282,6 @@ def login(request):
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
                     request.session['user_kind'] = user.kind
-
-                    res["data"]["is_success"] = True
-                    res["data"]["token"] = user.token
-                    res["data"]["last_login_time"] = user.last_login_time
-                    res["data"]["login_time"] = user.login_time
-                    res["data"]["exp_time"] = user.exp_time
                     return redirect('user:index_s')
                 else:
                     message = "密码不正确！"
