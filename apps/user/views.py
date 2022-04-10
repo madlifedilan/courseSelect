@@ -288,7 +288,7 @@ def login(request):
             except Exception as e:
                 print(e)
                 message = "用户不存在！"
-        message = login_form.errors
+        message = "验证码错误"
         return render(request, 'login/login.html', locals())
 
     login_form = UserForm()
