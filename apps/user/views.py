@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from ratelimit.decorators import ratelimit
 
 from courseSelect import settings
+from .decorator import auth_permission_required,get_user
 from .models import Course, Teacher, Student, User, Score, Admin
 from .forms import UserForm, RegisterForm
 from apps.base.tracking_view import web_tracking
@@ -104,6 +105,7 @@ def reg(request):
 
 @ratelimit(key='ip', rate='2/10s', block=True)
 @web_tracking
+@auth_permission_required('account.select_course')
 def stu1(request):
     # 先把所有课程给获取了
     studentID = request.session['user_id']
@@ -269,9 +271,14 @@ def register(request):
 @ratelimit(key='ip', rate='2/10s', block=True)
 @web_tracking
 def login(request):
+
+
     if request.session.get('is_login', None):
         return redirect('/index')
 
+    res = {'status': 1, 'err': '',
+           'data': {'is_success': False, "token": "",
+                    'last_login_time': '', 'login_time': '', 'exp_time': ''}}
     if request.method == "POST":
         login_form = UserForm(request.POST)
         message = "请检查填写的内容！"
@@ -286,6 +293,12 @@ def login(request):
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
                     request.session['user_kind'] = user.kind
+
+                    res["data"]["is_success"] = True
+                    res["data"]["token"] = user.token
+                    res["data"]["last_login_time"] = user.last_login_time
+                    res["data"]["login_time"] = user.login_time
+                    res["data"]["exp_time"] = user.exp_time
                     return redirect('user:index_s')
                 else:
                     message = "密码不正确！"
@@ -307,7 +320,7 @@ def logout(request):
 
 def update(request):
     import pandas as pd
-    filepath = "C:/Users/taxus chinensis/Desktop/course1.xlsx"
+    filepath = "C:/Users/Sakura/Desktop/course1.xlsx"
     data = pd.read_excel(filepath)
     dataDict = data.values
     for row in dataDict:

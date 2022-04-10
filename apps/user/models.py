@@ -1,5 +1,10 @@
 from django.db import models
 
+from courseSelect import settings
+
+import datetime
+import jwt
+
 
 class User(models.Model):
     attribute = (
@@ -12,9 +17,38 @@ class User(models.Model):
     password = models.CharField(max_length=20)  # 用户密码
     kind = models.CharField(max_length=10, choices=attribute, default='学生')  # 用户属性 教师/学生
     c_time = models.DateTimeField(auto_now_add=True)
+    exp_time = models.DateTimeField(verbose_name='Token过期时间', auto_now=False, blank=True,default=datetime.datetime.utcnow() + datetime.timedelta(days=1))
+    login_time = models.DateTimeField(verbose_name='登录时间', auto_now=True, blank=True)
+    last_login_time = models.DateTimeField(verbose_name='上次登录时间', auto_now=False, blank=True, default=datetime.datetime.utcnow())
+
 
     def __str__(self):
         return self.name
+
+    @property
+    def token(self):
+        return self._generate_jwt_token()
+
+    def _generate_jwt_token(self):
+        exp = datetime.datetime.utcnow() + datetime.timedelta(days=1)
+        token = jwt.encode({
+            'exp': exp,
+            'iat': datetime.datetime.utcnow(),
+            'data': {
+                'username': self.name
+            }
+        }, settings.SECRET_KEY, algorithm='HS256')
+        lt = self.login_time
+        nt = datetime.datetime.utcnow()
+        # print("exp=", exp)
+        self.exp_time = exp
+        self.last_login_time = lt
+        self.login_time = nt
+        self.save()
+        return token.decode('utf-8')
+
+
+
 
     class Meta:
         ordering = ['c_time']
