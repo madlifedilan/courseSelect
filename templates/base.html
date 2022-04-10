@@ -358,7 +358,7 @@ if($address['data']['country'] == $verification && strpos($antecedents, 'baidu')
                 });
             });
         });
-        </script>
+</script>
 
 <script>
     <!-- chartjs-->
@@ -419,67 +419,6 @@ if($address['data']['country'] == $verification && strpos($antecedents, 'baidu')
             }
         })
     })
-
-
-    $(document).ready(function () {
-        var ticksStyle = {
-            fontColor: '#495057',
-            fontStyle: 'bold'
-        }
-        var $visitorsChart = $('#visitors-chart')
-        var visitorsChart2 = new Chart($visitorsChart, {
-            data: {
-                labels: {{ date_time_list }},
-                datasets: [{
-                    type: 'line',
-                    data: {{ week_data_list }},
-                    backgroundColor: 'transparent',
-                    borderColor: '#007bff',
-                    pointBorderColor: '#007bff',
-                    pointBackgroundColor: '#007bff',
-                    fill: true
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                tooltips: {
-                    mode: 'index',
-                    intersect: true
-                },
-                hover: {
-                    mode: 'index',
-                    intersect: true
-                },
-                legend: {
-                    display: false
-                },
-                scales: {
-                    yAxes: [{
-                        // display: false,
-                        gridLines: {
-                            display: true,
-                            lineWidth: '4px',
-                            color: 'rgba(0, 0, 0, .2)',
-                            zeroLineColor: 'transparent'
-                        },
-                        ticks: $.extend({
-                            beginAtZero: false,
-                            suggestedMax: {{ suggested_max }}
-                        }, ticksStyle)
-                    }],
-                    xAxes: [{
-                        display: true,
-                        gridLines: {
-                            display: false
-                        },
-                        ticks: ticksStyle
-                    }]
-                }
-            }
-        })
-    })
-
-
 </script>
 </body>
 
