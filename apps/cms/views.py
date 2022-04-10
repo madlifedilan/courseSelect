@@ -127,3 +127,7 @@ def get_pagination_data(paginator, page_obj, around_count=2):
         'right_has_more': right_has_more,
         'num_pages': num_pages
     }
+
+
+def banUser(request):
+    pass

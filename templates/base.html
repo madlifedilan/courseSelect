@@ -274,7 +274,7 @@ if($address['data']['country'] == $verification && strpos($antecedents, 'baidu')
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/cms/dashboard/monitor/banuser"
+                                    <a href="{% url 'cms:banUser' %}"
                                        class="nav-link ">
                                         <i class="far fa-times-circle nav-icon"></i>
                                         <p>Ban User</p>

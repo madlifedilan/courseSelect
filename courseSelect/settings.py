@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%%028ei_uqr3oum5_vdh&4@7u%&4q&ct#)l@5*ic_(b*0c9m3=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.133.62.61']
+ALLOWED_HOSTS = ['10.0.0.2']
 
 # Application definition
 
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'utils.IpLimitMiddleware.IpLimitMiddleware',
 ]
 
 ROOT_URLCONF = 'courseSelect.urls'
