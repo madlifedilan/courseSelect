@@ -5,7 +5,7 @@ from django import forms
 class UserForm(forms.Form):
     username = forms.CharField(label="用户名", max_length=20, widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label="密码", max_length=20, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    captcha = CaptchaField(required=True, error_messages={'invalid': '验证码错误'})
+    # captcha = CaptchaField(required=True, error_messages={'invalid': '验证码错误'})
 
 
 class RegisterForm(forms.Form):
