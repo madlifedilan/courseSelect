@@ -1,7 +1,7 @@
 from django.core.cache import cache
 from django.shortcuts import render, redirect
 from ratelimit.decorators import ratelimit
-from .models import Course, Teacher, Student, User, Score, Admin
+from .models import Course, Teacher, Student, User, Score, Admin, Department
 from .forms import UserForm, RegisterForm
 from apps.base.tracking_view import web_tracking
 
@@ -151,7 +151,7 @@ def stu3(request):
     credit = 0
     student = request.session['user_id']
     for c in course_inform_check:
-       credit += c.courseCredit
+        credit += c.courseCredit
     for c in course_inform_check:
         cname = c.courseName
         score_check = Score.objects.filter(scoreCourse=cname).first()
@@ -319,8 +319,9 @@ def update(request):
     data = pd.read_excel(filepath)
     dataDict = data.values
     for row in dataDict:
-        courseID, courseSeriesNumber, courseName, courseCredit, courseTeacher = row[0], row[1], row[2], row[3], row[
-                                                                                                                13:-1]
+        courseID, courseSeriesNumber, courseName, courseCredit, department, courseTeacher = row[0], row[1], row[2], row[
+            3], row[5], row[
+                        13:-1]
         course = Course.objects.update_or_create(courseID=courseID, courseSeriesNumber=courseSeriesNumber,
                                                  courseName=courseName,
                                                  courseCredit=courseCredit)
@@ -330,7 +331,8 @@ def update(request):
                 user = User.objects.update_or_create(name=i, password='12345678', kind='教师')
                 teacher = Teacher.objects.update_or_create(id_id=user[0].id, teacherName=i, teacherID=i)
                 course[0].courseTeacher.add(teacher[0])
-    pass
+
+        Department.objects.update_or_create(departmentName=department)
 
 
 def base(request):
