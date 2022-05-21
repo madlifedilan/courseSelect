@@ -25,10 +25,15 @@ class User(models.Model):
         verbose_name_plural = '用户'
 
 
+class Department(models.Model):
+    departmentName = models.CharField(max_length=255)  # 学院名
+
+
 class Teacher(models.Model):
     id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)  # 教师类与用户类一对一
     teacherID = models.CharField(max_length=20)  # 教师工号
     teacherName = models.CharField(max_length=20, null=True)  # 教师姓名
+    department = models.ForeignKey(Department, on_delete=models.CASCADE,default='')  # 老师与学院一对多
     # 教师已开设课程，一对多，根据课程id寻找
 
 
@@ -38,6 +43,7 @@ class Student(models.Model):
     studentName = models.CharField(max_length=20)  # 学生姓名
     studentAddress = models.CharField(max_length=128, null=True)  # 学生区块链地址
     studentCredit = models.IntegerField(null=True)  # 学生已获学分
+    department = models.ForeignKey(Department, on_delete=models.CASCADE,default='')  # 学院与学生一对多
 
 
 class Admin(models.Model):
@@ -51,6 +57,7 @@ class Course(models.Model):
     courseCredit = models.PositiveIntegerField()  # 学分
     courseTeacher = models.ManyToManyField(Teacher)  # 授课教师 与教师类多对多
     courseStudent = models.ManyToManyField(Student)  # 课程学生 与学生类多对多
+    department = models.CharField(max_length=255,default='')  # 学院
 
     class Meta:
         unique_together = (("courseID", "courseName", "courseSeriesNumber"),)
@@ -64,6 +71,7 @@ class Score(models.Model):
     score_date = models.IntegerField(null=True)  # 成绩分数
     scoreCourse = models.CharField(max_length=20, null=True)  # 成绩课程名
     scoreCredit = models.PositiveIntegerField()
+    teacherScore = models.PositiveIntegerField(default=100)
 
     class Meta:
         unique_together = ("scoreStudent", "scoreCourse")

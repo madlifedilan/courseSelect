@@ -1,8 +1,8 @@
 from django.conf import settings
+from django.core.cache import cache
 from django.shortcuts import render
 from django.utils import timezone
 import datetime
-
 
 from apps.basefunction.models import VisitNumber, DayNumber, UserIP
 from django.core.paginator import Paginator
@@ -47,8 +47,6 @@ def get_dashboard_top_data():
     return context
 
 
-
-
 def get_dashboard_visitor_chart():
     days_list = []
     visit_list = []
@@ -71,6 +69,7 @@ def get_dashboard_visitor_chart():
         'suggested_max': max_num
     }
     return context
+
 
 def get_before_date(day):
     today = datetime.datetime.now()
@@ -130,4 +129,8 @@ def get_pagination_data(paginator, page_obj, around_count=2):
 
 
 def banUser(request):
-    pass
+    banUserList = cache.get('black', [])
+    context = {
+        'banUserList': banUserList
+    }
+    return render(request, 'cms/banUser.html', context=context)

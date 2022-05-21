@@ -98,7 +98,7 @@ def reg(request):
         return render(request, 'login/reg_score.html', context=context)
 
 
-@ratelimit(key='ip', rate='2/10s', block=True)
+# @ratelimit(key='ip', rate='2/10s', block=True)
 @web_tracking
 def stu1(request):
     # 先把所有课程给获取了
@@ -150,8 +150,8 @@ def stu3(request):
     global course_inform_check
     credit = 0
     student = request.session['user_id']
-    # for c in course_inform_check:
-    #    credit += c.courseCredit
+    for c in course_inform_check:
+       credit += c.courseCredit
     for c in course_inform_check:
         cname = c.courseName
         score_check = Score.objects.filter(scoreCourse=cname).first()
@@ -173,6 +173,7 @@ def stu3(request):
 
 def stu4(request):
     global course_inform_check
+    studentID = request.session['user_id']
     course_inform_check = []
     inform2 = []
     student = request.session['user_id']
@@ -188,6 +189,15 @@ def stu4(request):
         "course_inform_check": course_inform_check,
         "score_inform": score_inform
     }
+    if request.method == "GET":
+        return render(request, 'login/stu4.html', context=context)
+    else:
+        course_remove_id = request.POST.get("course_remove_id")
+        student_obj = Student.objects.get(id=studentID)
+        course_obj = Course.objects.get(id=course_remove_id)
+        course_obj.courseStudent.remove(student_obj)
+        return redirect('/stu4')
+
     return render(request, 'login/stu4.html', context=context)
 
 
@@ -305,7 +315,7 @@ def logout(request):
 
 def update(request):
     import pandas as pd
-    filepath = "C:/Users/home/Desktop/course1.xlsx"
+    filepath = "course1.xlsx"
     data = pd.read_excel(filepath)
     dataDict = data.values
     for row in dataDict:

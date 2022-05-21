@@ -26,15 +26,25 @@
                             <th>课程号</th>
                             <th>课程名</th>
                             <th>学分</th>
+                            <th>退课</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for course in course_inform_check %}
-                            <tr>
-                                <td>{{ course.courseID }}</td>
-                                <td>{{ course.courseName }}</td>
-                                <td>{{ course.courseCredit }}</td>
-                            </tr>
+                            <form action="/stu4/" method="post">
+                                {% csrf_token %}
+                                <tr>
+                                    <td>{{ course.courseID }}</td>
+                                    <td>{{ course.courseName }}</td>
+                                    <td>{{ course.courseCredit }}</td>
+                                    <td>
+                                        <button type="submit" class="btn btn-lg btn-default" onclick="display()"
+                                                name="course_remove_id" value="{{ course.id }}">
+                                            退课
+                                        </button>
+                                    </td>
+                                </tr>
+                            </form>
                         {% endfor %}
                         </tbody>
                     </table>
@@ -45,4 +55,9 @@
         </div>
     </div>
     <!-- /.row -->
+    <script>
+        function display() {
+            alert("退课成功")
+        }
+    </script>
 {% endblock %}

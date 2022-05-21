@@ -1,5 +1,4 @@
 
-
 class MiddlewareMixin(object):
     def __init__(self, get_response=None):
         self.get_response = get_response
@@ -17,7 +16,7 @@ class MiddlewareMixin(object):
 
 
 class CORSMiddleware(MiddlewareMixin):
-    def process_response(self,request,response):
+    def process_response(self, request, response):
         # 添加响应头
 
         # 允许你的域名来获取我的数据

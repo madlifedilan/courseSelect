@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}banUser{% endblock %}
+{% block content %}
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <table id="courseSelect" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>课程代号</th>
+                                    <th>课程名称</th>
+                                    <th>课程学分</th>
+                                    <th>授课教师</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for banUser in banUserList %}
+                                    <tr>
+                                        <td>{{ course.id }}</td>
+                                        <td>{{ course.courseName }}</td>
+                                        <td>{{ course.courseCredit }}</td>
+                                        <td>{{ course.courseTeacher.teacherName }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div><!--card body-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
