@@ -326,13 +326,14 @@ def update(request):
                                                  courseName=courseName,
                                                  courseCredit=courseCredit)
 
+        department = Department.objects.update_or_create(departmentName=department)
+
         for i in courseTeacher:
             if i == i:
                 user = User.objects.update_or_create(name=i, password='12345678', kind='教师')
                 teacher = Teacher.objects.update_or_create(id_id=user[0].id, teacherName=i, teacherID=i)
-                course[0].courseTeacher.add(teacher[0])
-
-        Department.objects.update_or_create(departmentName=department)
+                course[0].courseTeacher.add(teacher[0])  # 课程增加老师
+                teacher[0].department.add(department[0])  # 老师增加学院
 
 
 def base(request):
