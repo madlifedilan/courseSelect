@@ -335,6 +335,7 @@ def update(request):
                 course[0].courseTeacher.add(teacher[0])  # 课程增加老师
 
                 department[0].teacher_set.add(teacher[0])  # 老师增加学院
+                department[0].course_set.add(course[0])  # 课程增加学院
 
 
 def base(request):
