@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}查询成绩{% endblock %}
+{% block content %}
+     <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>查询成绩</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">个人课程信息表</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>课程名称</th>
+                            <th>课程学分</th>
+                            <th>成绩</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for score in score_inform %}
+                            <tr>
+                                <td>{{ score.scoreCourse }}</td>
+                                <td>{{ score.scoreCredit }}</td>
+                                <td>{{ score.score_date }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <!-- /.row -->
+{% endblock %}
