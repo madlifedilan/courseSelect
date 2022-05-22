@@ -23,5 +23,6 @@ urlpatterns = [
     path('adm2/', views.adm2, name='adm2'),
     path('update/', views.update, name='update'),
     path('base/', views.base, name='base'),
-
+    path('tea3/', views.tea3, name='tea3'),
+    path('teacher_score/', views.teacher_score, name='teacher_score'),
 ]

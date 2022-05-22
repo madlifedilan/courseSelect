@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}登记成绩{% endblock %}
+{% block content %}
+    <div class="content-wrapper" style="min-height:auto;">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>查看评教</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- card-header -->
+                            <div class="card-header">
+                                <h3 class="card-title">评教学生名单</h3>
+                                <div class="card-tools">
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    {% csrf_token %}
+                                    <thead>
+                                    <tr>
+                                        <th>课程号</th>
+                                        <th>课程学分</th>
+                                        <th>学生学号</th>
+                                        <th>评教成绩</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for score in course_student_inform %}
+                                        <tr>
+                                            <td>{{ score.scoreCourse}}</td>
+                                            <td>{{ score.scoreCredit }}</td>
+                                            <td>{{ score.scoreStudent_id}}</td>
+                                            <td>{{ score.teacherScore }}</td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+    </div>
+{% endblock %}
