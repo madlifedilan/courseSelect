@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}登记成绩{% endblock %}
+{% block content %}
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>查看评教</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- card-header -->
+                            <div class="card-header">
+                                <h3 class="card-title">已开设课程信息表</h3>
+                                <div class="card-tools">
+                                    <form action="/tea3/" method="post">
+                                        {% csrf_token %}
+                                        <div class="input-group">
+                                            <input type="text" name="course_id" value="{{ course_id }}"
+                                                   formmethod="post" class="form-control form-control-lg"
+                                                   placeholder="输入课程号">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-lg btn-default">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    {% csrf_token %}
+                                    <thead>
+                                    <tr>
+                                        <th>课程号</th>
+                                        <th>课程名</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for course in course_inform %}
+                                        <tr>
+                                            <td>{{ course.id }}</td>
+                                            <td>{{ course.courseName }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+{% endblock %}
