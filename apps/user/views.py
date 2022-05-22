@@ -23,8 +23,17 @@ def index_t(request):
 
 
 def index_s(request):
-    pass
-    return render(request, 'login/index_s.html')
+    studentID = request.session["user_id"]
+    score = Score.objects.filter(scoreStudent__id=studentID)
+
+    averageScore=0
+    totalCredit=0
+    context = {
+        "averageScore": averageScore,
+        "totalCredit": totalCredit,
+    }
+
+    return render(request, 'login/index_s.html', context=context)
 
 
 def index_a(request):
@@ -73,7 +82,37 @@ def tea2(request):
         }
         return render(request, 'login/reg_score.html', context=context)
 
+def tea3(request):
+    global course_id, course_student_inform
+    course_id = 0
+    course_student_inform = []
+    if request.method == "GET":
+        teacher_id = request.session['user_id']
+        course_inform = Course.objects.filter(courseTeacher__id=teacher_id)
+        context = {
+            "course_inform": course_inform,
+        }
+        return render(request, 'login/tea3.html', context=context)
+    else:
+        teacher_id = request.session['user_id']
+        course_id = request.POST.get("course_id")
+        course_student_inform = Score.objects.filter(scoreCourse=course_id)
+        context = {
+            "student_inform_reg": course_student_inform
+        }
+    return render(request, 'login/teacher_score.html', context=context)
 
+def teacher_score(request):
+    if request.method == "GET":
+        context = {
+            "student_inform_reg": course_student_inform
+        }
+        return render(request, 'login/teacher_score.html', context=context)
+    else:
+        context = {
+            "student_inform_reg": course_student_inform
+        }
+    return
 def reg(request):
     global student_inform_reg, course_reg_id
     if request.method == "GET":
@@ -197,8 +236,6 @@ def stu4(request):
         course_obj = Course.objects.get(id=course_remove_id)
         course_obj.courseStudent.remove(student_obj)
         return redirect('/stu4')
-
-    return render(request, 'login/stu4.html', context=context)
 
 
 def adm1(request):
@@ -335,7 +372,4 @@ def update(request):
                 course[0].courseTeacher.add(teacher[0])  # 课程增加老师
 
                 department[0].teacher_set.add(teacher[0])  # 老师增加学院
-
-
-def base(request):
-    return render(request, 'base.html')
+                department[0].course_set.add(course[0])  # 课程增加学院
