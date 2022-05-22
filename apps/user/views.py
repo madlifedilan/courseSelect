@@ -23,8 +23,17 @@ def index_t(request):
 
 
 def index_s(request):
-    pass
-    return render(request, 'login/index_s.html')
+    studentID = request.session["user_id"]
+    score = Score.objects.filter(scoreStudent__id=studentID)
+
+    averageScore=0
+    totalCredit=0
+    context = {
+        "averageScore": averageScore,
+        "totalCredit": totalCredit,
+    }
+
+    return render(request, 'login/index_s.html', context=context)
 
 
 def index_a(request):
@@ -198,8 +207,6 @@ def stu4(request):
         course_obj.courseStudent.remove(student_obj)
         return redirect('/stu4')
 
-    return render(request, 'login/stu4.html', context=context)
-
 
 def adm1(request):
     if request.method == "GET":
@@ -336,7 +343,3 @@ def update(request):
 
                 department[0].teacher_set.add(teacher[0])  # 老师增加学院
                 department[0].course_set.add(course[0])  # 课程增加学院
-
-
-def base(request):
-    return render(request, 'base.html')

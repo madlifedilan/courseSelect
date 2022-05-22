@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
                 ('studentName', models.CharField(max_length=20)),
                 ('studentAddress', models.CharField(max_length=128, null=True)),
                 ('studentCredit', models.IntegerField(null=True)),
-                ('department', models.ForeignKey(null=None, on_delete=django.db.models.deletion.CASCADE, to='user.department')),
+                ('department', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='user.department')),
             ],
         ),
         migrations.CreateModel(

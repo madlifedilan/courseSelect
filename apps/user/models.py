@@ -43,7 +43,7 @@ class Student(models.Model):
     studentName = models.CharField(max_length=20)  # 学生姓名
     studentAddress = models.CharField(max_length=128, null=True)  # 学生区块链地址
     studentCredit = models.IntegerField(null=True)  # 学生已获学分
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=None)  # 学院与学生一对多
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)  # 学院与学生一对多
 
 
 class Admin(models.Model):

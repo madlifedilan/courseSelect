@@ -22,6 +22,5 @@ urlpatterns = [
     path('adm1/', views.adm1, name='adm1'),
     path('adm2/', views.adm2, name='adm2'),
     path('update/', views.update, name='update'),
-    path('base/', views.base, name='base'),
 
 ]
