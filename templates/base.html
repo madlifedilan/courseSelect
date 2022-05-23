@@ -217,6 +217,15 @@ if($address['data']['country'] == $verification && strpos($antecedents, 'baidu')
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{% url 'user:tea3' %}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    tea3
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
                         {#/.teacher#}
                     {% elif request.session.user_kind == '学生' %}
                         <li class="nav-item">
