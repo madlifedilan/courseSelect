@@ -155,7 +155,7 @@ def stu1(request):
     if not course_inform:
         course_inform = list(Course.objects.all())
         for course in course_inform:
-            print(course.courseTeacher)
+            print(course.courseTeacher.teacherName)
         cache.set("course_inform", course_inform, 60)
 
     context = {
@@ -365,19 +365,14 @@ def update(request):
     dataDict = data.values
     for row in dataDict:
         courseID, courseSeriesNumber, courseName, courseCredit, department, courseTeacher = row[0], row[1], row[2], row[
-            3], row[5], row[
-                        13]
-        course = Course.objects.update_or_create(courseID=courseID, courseSeriesNumber=courseSeriesNumber,
-                                                 courseName=courseName,
-                                                 courseCredit=courseCredit)
+            3], row[5], row[13]
+        user_obj = User.objects.update_or_create(name=courseTeacher, password='12345678', kind='教师')
+        teacher_obj = Teacher.objects.update_or_create(id_id=user_obj[0].id, teacherName=courseTeacher, teacherID=user_obj[0].id)
+        course_obj = Course.objects.update_or_create(courseID=courseID, courseSeriesNumber=courseSeriesNumber,
+                                                     courseName=courseName,
+                                                     courseCredit=courseCredit, courseTeacher=teacher_obj[0])
 
-        department = Department.objects.update_or_create(departmentName=department)
+        department_obj = Department.objects.update_or_create(departmentName=department)
 
-        for i in courseTeacher:
-            if i == i:
-                user = User.objects.update_or_create(name=i, password='12345678', kind='教师')
-                teacher = Teacher.objects.update_or_create(id_id=user[0].id, teacherName=i, teacherID=i)
-                course[0].courseTeacher.add(teacher[0])  # 课程增加老师
-
-                department[0].teacher_set.add(teacher[0])  # 老师增加学院
-                department[0].course_set.add(course[0])  # 课程增加学院
+        department_obj[0].teacher_set.add(teacher_obj[0])  # 老师增加学院
+        department_obj[0].course_set.add(course_obj[0])  # 课程增加学院
