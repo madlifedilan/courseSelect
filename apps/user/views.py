@@ -98,9 +98,9 @@ def tea3(request):
         return render(request, 'login/tea3.html', context=context)
     else:
         course_id = request.POST.get("course_id")
-        course_student_inform = Score.objects.filter(scoreCourse=course_id)
+        course_student_inform = Score.objects.filter(scoreCourseID=course_id)
         context = {
-            "student_inform_reg": course_student_inform
+            "course_student_inform": course_student_inform
         }
     return render(request, 'login/teacher_score.html', context=context)
 
