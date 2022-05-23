@@ -155,7 +155,7 @@ def stu1(request):
     if not course_inform:
         course_inform = list(Course.objects.all())
         for course in course_inform:
-            course.courseTeacher
+            print(course.courseTeacher)
         cache.set("course_inform", course_inform, 60)
 
     context = {
@@ -366,7 +366,7 @@ def update(request):
     for row in dataDict:
         courseID, courseSeriesNumber, courseName, courseCredit, department, courseTeacher = row[0], row[1], row[2], row[
             3], row[5], row[
-                        13:-1]
+                        13]
         course = Course.objects.update_or_create(courseID=courseID, courseSeriesNumber=courseSeriesNumber,
                                                  courseName=courseName,
                                                  courseCredit=courseCredit)

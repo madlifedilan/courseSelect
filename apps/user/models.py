@@ -55,7 +55,7 @@ class Course(models.Model):
     courseSeriesNumber = models.CharField(max_length=20)  # 课序号
     courseName = models.CharField(max_length=255)  # 课程名
     courseCredit = models.PositiveIntegerField()  # 学分
-    courseTeacher = models.ManyToManyField(Teacher)  # 授课教师 与教师类多对多
+    courseTeacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)  # 授课教师 与教师类一对多
     courseStudent = models.ManyToManyField(Student)  # 课程学生 与学生类多对多
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)  # 学院与学生一对多
 
