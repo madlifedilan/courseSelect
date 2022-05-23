@@ -143,25 +143,23 @@ def reg(request):
         return render(request, 'login/reg_score.html', context=context)
 
 def stu_to_tea(request):
-    global course_inform, course_reg_id
+    global course_score_inform, course_score_id
+
     if request.method == "GET":
         context={
-            "course_inform": course_inform
+            "course_score_inform": course_score_inform
         }
         return render(request, 'login/stu_to_tea.html', context=context)
     else:
         score = request.POST.get("score")
-        teacher_id = request.POST.get("teacher_id")
-        teacher_obj = Teacher.objects.get(teacherID=teacher_id)
-        tName = teacher_obj.teacherName
+        student_id = request.session['user_id']
         # course_id=request.POST.get("course_id")
-        course_obj = Course.objects.get(courseID=course_reg_id)
-        cname = course_obj.courseName
-        new_score = Score.objects.create(courseID=course_reg_id, courseName=cname,
-                                         teacherName=tName, score_date= score)
+
+        new_score = Score.objects.get(courseID=course_score_id,scoreStudent=student_id)
+        new_score.update(teacherScore=score)
         new_score.save()
         context = {
-            "course_inform": course_inform
+            "course_score_inform": course_score_inform
         }
         return render(request, 'login/stu_to_tea.html', context=context)
 
@@ -197,23 +195,34 @@ def stu1(request):
 
 
 def stu2(request):
-    global course_inform_check
+    global course_inform_check,course_score_id,course_score_inform,tea_score_inform
     course_inform_check = []
+    tea_score_inform =[]
+    course_score_id = 0
     inform2 = []
     student = request.session['user_id']
-    inform = Course.objects.filter(courseStudent__id=student)
-    for c in inform:
-        cid = c.id
-        inform2.append(cid)
-    for c in inform2:
-        obj = Course.objects.get(id=c)
-        course_inform_check.append(obj)
-    score_inform = Score.objects.filter(scoreStudent_id=student)
-    context = {
-        "course_inform_check": course_inform_check,
-        "score_inform": score_inform
-    }
-    return render(request, 'login/stu2.html', context=context)
+    if request.method == "GET":
+        inform = Course.objects.filter(courseStudent__id=student)
+        for c in inform:
+            cid = c.id
+            inform2.append(cid)
+        for c in inform2:
+            obj = Course.objects.get(id=c)
+            course_inform_check.append(obj)
+        score_inform = Score.objects.filter(scoreStudent_id=student)
+        context = {
+            "course_inform_check": course_inform_check,
+            "score_inform": score_inform
+        }
+        return render(request, 'login/stu2.html', context=context)
+    else:
+        course_score_id = request.POST.get("course_id")
+        course_score_inform = Score.objects.filter(scoreCourseID=course_score_id, scoreStudent_id=student)
+
+        context = {
+            "course_score_inform": course_score_inform
+        }
+        return render(request, 'login/stu_to_tea.html', context=context)
 
 
 def stu3(request):

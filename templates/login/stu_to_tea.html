@@ -37,11 +37,11 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for course in course_inform %}
+                                    {% for course in course_score_inform %}
                                         <tr>
-                                            <td>{{ course.courseID }}</td>
-                                            <td>{{ course.courseName }}</td>
-                                            <td>{{ course.teacherName }}</td>
+                                            <td>{{ course.scoreCourseID }}</td>
+                                            <td>{{ course.scoreCourse }}</td>
+                                            <td>{{ course.scoreTeacher.teacherName }}</td>
                                             <form action="/stu_to_tea/" method="post">
                                                 {% csrf_token %}
 {#                                                <td>#}
