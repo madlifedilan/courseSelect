@@ -71,7 +71,8 @@ class Score(models.Model):
     score_date = models.IntegerField(null=True)  # 成绩分数
     scoreCourse = models.CharField(max_length=20, null=True)  # 成绩课程名
     scoreCredit = models.PositiveIntegerField()
-    teacherScore = models.PositiveIntegerField(default=100)
+    teacherScore = models.PositiveIntegerField(null=True)
+    scoreTeacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
 
     class Meta:
         unique_together = ("scoreStudent", "scoreCourse")

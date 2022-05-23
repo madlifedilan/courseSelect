@@ -26,8 +26,8 @@ def index_s(request):
     studentID = request.session["user_id"]
     score = Score.objects.filter(scoreStudent__id=studentID)
 
-    averageScore=0
-    totalCredit=0
+    averageScore = 0
+    totalCredit = 0
     context = {
         "averageScore": averageScore,
         "totalCredit": totalCredit,
@@ -82,6 +82,7 @@ def tea2(request):
         }
         return render(request, 'login/reg_score.html', context=context)
 
+
 def tea3(request):
     global course_id, course_student_inform
     course_id = 0
@@ -94,13 +95,13 @@ def tea3(request):
         }
         return render(request, 'login/tea3.html', context=context)
     else:
-        teacher_id = request.session['user_id']
         course_id = request.POST.get("course_id")
         course_student_inform = Score.objects.filter(scoreCourse=course_id)
         context = {
             "student_inform_reg": course_student_inform
         }
     return render(request, 'login/teacher_score.html', context=context)
+
 
 def teacher_score(request):
     if request.method == "GET":
@@ -113,6 +114,8 @@ def teacher_score(request):
             "student_inform_reg": course_student_inform
         }
     return
+
+
 def reg(request):
     global student_inform_reg, course_reg_id
     if request.method == "GET":
@@ -123,13 +126,15 @@ def reg(request):
     else:
         score = request.POST.get("score")
         student_id = request.POST.get("student_id")
+        teacher_id = request.session['user_id']
         student_obj = Student.objects.get(studentID=student_id)
+        teacher_obj = Teacher.objects.get(teacherID=teacher_id)
         idid = student_obj.id_id
         course_obj = Course.objects.get(id=course_reg_id)
         cname = course_obj.courseName
         ccredit = course_obj.courseCredit
         new_score = Score.objects.create(scoreCourse=cname, score_date=score,
-                                         scoreStudent_id=idid, scoreCredit=ccredit)
+                                         scoreStudent_id=idid, scoreCredit=ccredit, scoreTeacher=teacher_obj)
         new_score.save()
         context = {
             "student_inform_reg": student_inform_reg
@@ -148,8 +153,11 @@ def stu1(request):
     # page_obj = paginator.page(page)
     course_inform = cache.get("course_inform")
     if not course_inform:
-        course_inform = Course.objects.all()
+        course_inform = list(Course.objects.all())
+        for course in course_inform:
+            course.courseTeacher
         cache.set("course_inform", course_inform, 60)
+
     context = {
         "course_inform": course_inform,
     }
