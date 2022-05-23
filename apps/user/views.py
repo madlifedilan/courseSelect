@@ -11,7 +11,8 @@ student_inform = []
 course_student_inform = []
 course_inform_check = []
 course_inform = []
-
+course_score_id = 0
+course_score_inform = []
 
 def index(request):
     pass
@@ -155,8 +156,8 @@ def stu_to_tea(request):
         student_id = request.session['user_id']
         # course_id=request.POST.get("course_id")
 
-        new_score = Score.objects.get(courseID=course_score_id,scoreStudent=student_id)
-        new_score.update(teacherScore=score)
+        new_score = Score.objects.get(scoreCourseID=course_score_id, scoreStudent=student_id)
+        new_score.teacherScore = score
         new_score.save()
         context = {
             "course_score_inform": course_score_inform
