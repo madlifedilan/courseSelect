@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}登记成绩{% endblock %}
+{% block content %}
+    <div class="content-wrapper" style="min-height:auto;">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>登记成绩</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- card-header -->
+                            <div class="card-header">
+                                <h3 class="card-title">班级学生名单</h3>
+                                <div class="card-tools">
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    {% csrf_token %}
+                                    <thead>
+                                    <tr>
+                                        <th>课程号</th>
+                                        <th>课程名称</th>
+                                        <th>老师编号</th>
+                                        <th>评教成绩</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for course in course_inform %}
+                                        <tr>
+                                            <td>{{ course.courseID }}</td>
+                                            <td>{{ course.courseName }}</td>
+                                            <td>{{ course.teacherName }}</td>
+                                            <form action="/stu_to_tea/" method="post">
+                                                {% csrf_token %}
+{#                                                <td>#}
+{#                                                    <input type="text" name="student_id" value="{{ student.studentID }}"#}
+{#                                                           formmethod="post" class="form-control form-control-sm"#}
+{#                                                           placeholder="确认学号">#}
+{#                                                </td>#}
+                                                <td>
+                                                    <input type="text" name="score" value="{{ score }}"
+                                                           formmethod="post" class="form-control form-control-sm"
+                                                           placeholder="确认成绩">
+                                                </td>
+                                                <td class="project-actions text-right">
+                                                    <button type="submit" class="btn btn-primary">确认成绩</button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+    </div>
+{% endblock %}

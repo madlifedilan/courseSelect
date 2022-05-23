@@ -10,6 +10,7 @@ student_inform_reg = []
 student_inform = []
 course_student_inform = []
 course_inform_check = []
+course_inform = []
 
 
 def index(request):
@@ -141,6 +142,30 @@ def reg(request):
         }
         return render(request, 'login/reg_score.html', context=context)
 
+def stu_to_tea(request):
+    global course_inform, course_reg_id
+    if request.method == "GET":
+        context={
+            "course_inform": course_inform
+        }
+        return render(request, 'login/stu_to_tea.html', context=context)
+    else:
+        score = request.POST.get("score")
+        teacher_id = request.POST.get("teacher_id")
+        teacher_obj = Teacher.objects.get(teacherID=teacher_id)
+        tName = teacher_obj.teacherName
+        # course_id=request.POST.get("course_id")
+        course_obj = Course.objects.get(courseID=course_reg_id)
+        cname = course_obj.courseName
+        new_score = Score.objects.create(courseID=course_reg_id, courseName=cname,
+                                         teacherName=tName, score_date= score)
+        new_score.save()
+        context = {
+            "course_inform": course_inform
+        }
+        return render(request, 'login/stu_to_tea.html', context=context)
+
+
 
 # @ratelimit(key='ip', rate='2/10s', block=True)
 @web_tracking
@@ -154,8 +179,6 @@ def stu1(request):
     course_inform = cache.get("course_inform")
     if not course_inform:
         course_inform = list(Course.objects.all())
-        for course in course_inform:
-            print(course.courseTeacher.teacherName)
         cache.set("course_inform", course_inform, 60)
 
     context = {
