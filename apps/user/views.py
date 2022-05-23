@@ -134,7 +134,7 @@ def reg(request):
         cname = course_obj.courseName
         ccredit = course_obj.courseCredit
         new_score = Score.objects.create(scoreCourse=cname, score_date=score,
-                                         scoreStudent_id=idid, scoreCredit=ccredit, scoreTeacher=teacher_obj)
+                                         scoreStudent_id=idid, scoreCredit=ccredit, scoreTeacher=teacher_obj,scoreCourseID=course_reg_id)
         new_score.save()
         context = {
             "student_inform_reg": student_inform_reg
