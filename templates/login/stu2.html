@@ -44,7 +44,7 @@
                             <th>课程名称</th>
                             <th>课程学分</th>
                             <th>成绩</th>
-                            <th>评教</th>
+{#                            <th>评教</th>#}
                         </tr>
                         </thead>
                         <tbody>
@@ -54,11 +54,11 @@
                                 <td>{{ score.scoreCourse }}</td>
                                 <td>{{ score.scoreCredit }}</td>
                                 <td>{{ score.score_date }}</td>
-                                <td>
-                                    <form ction="{% url 'user:teacher_score' %}">
-                                        <button class="btn btn-lg btn-default">ping</button>
-                                    </form>
-                                </td>
+{#                                <td>#}
+{#                                    <form ction="{% url 'user:teacher_score' %}">#}
+{#                                        <button class="btn btn-lg btn-default">ping</button>#}
+{#                                    </form>#}
+{#                                </td>#}
                             </tr>
                         {% endfor %}
                         </tbody>

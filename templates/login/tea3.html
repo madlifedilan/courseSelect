@@ -43,7 +43,7 @@
                                     <tr>
                                         <th>课程号</th>
                                         <th>课程名</th>
-                                        <th>查看评教</th>
+{#                                        <th>查看评教</th>#}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -51,11 +51,11 @@
                                         <tr>
                                             <td>{{ course.id }}</td>
                                             <td>{{ course.courseName }}</td>
-                                            <td>
-                                                <form action="{% url 'user:teacher_score' %}">
-                                                    <button class="btn btn-lg btn-default">查看详情</button>
-                                                </form>
-                                            </td>
+{#                                            <td>#}
+{#                                                <form action="{% url 'user:teacher_score' %}">#}
+{#                                                    <button class="btn btn-lg btn-default">查看详情</button>#}
+{#                                                </form>#}
+{#                                            </td>#}
                                         </tr>
                                     {% endfor %}
                                     </tbody>
