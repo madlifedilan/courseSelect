@@ -1,4 +1,5 @@
 from django.core.cache import cache
+from django.db.models import Avg, Sum
 from django.shortcuts import render, redirect
 from ratelimit.decorators import ratelimit
 from .models import Course, Teacher, Student, User, Score, Admin, Department
@@ -14,6 +15,7 @@ course_inform = []
 course_score_id = 0
 course_score_inform = []
 
+
 def index(request):
     pass
     return render(request, 'login/index.html')
@@ -25,14 +27,39 @@ def index_t(request):
 
 
 def index_s(request):
-    studentID = request.session["user_id"]
-    score = Score.objects.filter(scoreStudent__id=studentID)
+    student = request.session['user_id']
+    scores = Score.objects.filter(scoreStudent=student)
+    GPA = 0
 
-    averageScore = 0
-    totalCredit = 0
+    averageScore = scores.aggregate(Avg('score_date'))['score_date__avg']
+    credit = scores.aggregate(Sum('scoreCredit'))['scoreCredit__sum']
+    for score in scores:
+        if score.score_date >= 90:
+            GPA += 4.0 * score.scoreCredit / credit
+            break
+        elif score.score_date >= 85:
+            GPA += 3.7 * score.scoreCredit / credit
+            break
+        elif score.score_date >= 80:
+            GPA += 3.3 * score.scoreCredit / credit
+            break
+        elif score.score_date >= 75:
+            GPA += 3.0 * score.scoreCredit / credit
+            break
+        elif score.score_date >= 70:
+            GPA += 2.7 * score.scoreCredit / credit
+            break
+        elif score.score_date >= 65:
+            GPA += 2.3 * score.scoreCredit / credit
+            break
+        else:
+            GPA += 2.0
+            break
+
     context = {
+        "credit": credit,
         "averageScore": averageScore,
-        "totalCredit": totalCredit,
+        "GPA": GPA
     }
 
     return render(request, 'login/index_s.html', context=context)
@@ -136,18 +163,20 @@ def reg(request):
         cname = course_obj.courseName
         ccredit = course_obj.courseCredit
         new_score = Score.objects.create(scoreCourse=cname, score_date=score,
-                                         scoreStudent_id=idid, scoreCredit=ccredit, scoreTeacher=teacher_obj,scoreCourseID=course_reg_id)
+                                         scoreStudent_id=idid, scoreCredit=ccredit, scoreTeacher=teacher_obj,
+                                         scoreCourseID=course_reg_id)
         new_score.save()
         context = {
             "student_inform_reg": student_inform_reg
         }
         return render(request, 'login/reg_score.html', context=context)
 
+
 def stu_to_tea(request):
     global course_score_inform, course_score_id
 
     if request.method == "GET":
-        context={
+        context = {
             "course_score_inform": course_score_inform
         }
         return render(request, 'login/stu_to_tea.html', context=context)
@@ -163,7 +192,6 @@ def stu_to_tea(request):
             "course_score_inform": course_score_inform
         }
         return render(request, 'login/stu_to_tea.html', context=context)
-
 
 
 # @ratelimit(key='ip', rate='2/10s', block=True)
@@ -196,9 +224,9 @@ def stu1(request):
 
 
 def stu2(request):
-    global course_inform_check,course_score_id,course_score_inform,tea_score_inform
+    global course_inform_check, course_score_id, course_score_inform, tea_score_inform
     course_inform_check = []
-    tea_score_inform =[]
+    tea_score_inform = []
     course_score_id = 0
     inform2 = []
     student = request.session['user_id']
@@ -210,7 +238,7 @@ def stu2(request):
         for c in inform2:
             obj = Course.objects.get(id=c)
             course_inform_check.append(obj)
-        score_inform = Score.objects.filter(scoreStudent_id=student)
+        score_inform = Score.objects.filter(scoreStudent__id=student)
         context = {
             "course_inform_check": course_inform_check,
             "score_inform": score_inform
@@ -227,18 +255,15 @@ def stu2(request):
 
 
 def stu3(request):
-    global course_inform_check
     credit = 0
     student = request.session['user_id']
-    for c in course_inform_check:
-        credit += c.courseCredit
-    for c in course_inform_check:
-        cname = c.courseName
-        score_check = Score.objects.filter(scoreCourse=cname).first()
+    scores = Score.objects.filter(scoreStudent=student)
+
+    for s in scores:
+        score_check = s.score_date
         try:
-            score = score_check.score_date
-            if score >= 60:
-                credit += c.courseCredit
+            if score_check >= 60:
+                credit += s.scoreCredit
             else:
                 continue
         except AttributeError:
@@ -247,6 +272,7 @@ def stu3(request):
     student_inform = Student.objects.filter(id_id=student)
     context = {
         "student_inform": student_inform,
+        "student_credit": credit
     }
     return render(request, 'login/stu3.html', context=context)
 
@@ -376,7 +402,7 @@ def login(request):
             except Exception as e:
                 print(e)
                 message = "用户不存在！"
-                return render(request, 'login/login.html', locals())
+            return render(request, 'login/login.html', locals())
         message = "验证码错误"
         return render(request, 'login/login.html', locals())
 
@@ -401,7 +427,8 @@ def update(request):
         courseID, courseSeriesNumber, courseName, courseCredit, department, courseTeacher = row[0], row[1], row[2], row[
             3], row[5], row[13]
         user_obj = User.objects.update_or_create(name=courseTeacher, password='12345678', kind='教师')
-        teacher_obj = Teacher.objects.update_or_create(id_id=user_obj[0].id, teacherName=courseTeacher, teacherID=user_obj[0].id)
+        teacher_obj = Teacher.objects.update_or_create(id_id=user_obj[0].id, teacherName=courseTeacher,
+                                                       teacherID=user_obj[0].id)
         course_obj = Course.objects.update_or_create(courseID=courseID, courseSeriesNumber=courseSeriesNumber,
                                                      courseName=courseName,
                                                      courseCredit=courseCredit, courseTeacher=teacher_obj[0])
