@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Advanced Form</h1>
+                        <h1>个人信息</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Advanced Form</li>
+                            <li class="breadcrumb-item active">个人信息</li>
                         </ol>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
             <!-- SELECT2 EXAMPLE -->
             <div class="card card-default">
                 <div class="card-header">
-                    <h3 class="card-title">Select2 (Default Theme)</h3>
+                    <h3 class="card-title">修改信息</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -33,96 +33,46 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>学生账号</label>
-                                <input class="form-control select2" name="id" disabled="disabled" value="" style="width: 100%;">
-                            </div>
-                            <!-- /.form-group -->
-                            <div class="form-group">
-                                <label>学生姓名</label>
-                                <input class="form-control select2" disabled="disabled" style="width: 100%;">
-                            </div>
-                            <!-- /.form-group -->
+                <form action="/form/" method="post">
+                {% csrf_token %}
+                    {% if request.session.is_login %}
+                        <div class="col-sm-6">
+                          <!-- text input -->
+                          <div class="form-group">
+                            <label>用户编号</label>
+                            <input type="text" class="form-control" value="{{ request.session.user_id }}" disabled="disabled">
+                          </div>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Multiple</label>
-                                <select class="select2" multiple="multiple" data-placeholder="Select a State"
-                                        style="width: 100%;">
-                                    <option>Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <!-- /.form-group -->
-                            <div class="form-group">
-                                <label>Disabled Result</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option disabled="disabled">California (disabled)</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <!-- /.form-group -->
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label>学生姓名</label>
+                            <input type="text" class="form-control" value="{{ request.session.user_name }}" disabled="disabled">
+                          </div>
                         </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
+                        <div class="col-sm-6">
+                          <!-- text input -->
+                          <div class="form-group">
+                            <label>学院</label>
+                            <input type="text" class="form-control" placeholder="{{ student.department.departmentName }}"
+                                   name="student_department" >
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <!-- text input -->
+                          <div class="form-group">
+                            <label>密码</label>
+                            <input type="text" class="form-control" placeholder="修改密码" value="{{ user_password }}"
+                                    name="user_password">
+                          </div>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-lg btn-default" onclick="display()">
+                                提交修改
+                            </button>
+                        </div>
+                    {% endif %}
 
-                    <h5>Custom Color Variants</h5>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <label>Minimal (.select2-danger)</label>
-                                <select class="form-control select2 select2-danger"
-                                        data-dropdown-css-class="select2-danger"
-                                        style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <!-- /.form-group -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <label>Multiple (.select2-purple)</label>
-                                <div class="select2-purple">
-                                    <select class="select2" multiple="multiple" data-placeholder="Select a State"
-                                            data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                        <option>Alabama</option>
-                                        <option>Alaska</option>
-                                        <option>California</option>
-                                        <option>Delaware</option>
-                                        <option>Tennessee</option>
-                                        <option>Texas</option>
-                                        <option>Washington</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- /.form-group -->
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div>
+                </form>
                 <!-- /.card-body -->
                 <div class="card-footer">
                     Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and
@@ -131,6 +81,11 @@
                 </div>
             </div>
         </section>
+    <script>
+        function display(){
+            window.history.back(-1);
+        }
+    </script>
     </div>
 
 {% endblock %}

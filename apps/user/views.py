@@ -431,8 +431,24 @@ def logout(request):
         return redirect("/index/")
     request.session.flush()
     return redirect("/index/")
+
+
 def form(request):
-    return render(request,'login/form.html',locals())
+    if request.method == "POST":
+        user_id = request.session.get("user_id")
+        user_obj = User.objects.get(id=user_id)
+        user_password = request.POST.get("user_password")
+        user_obj.password = user_password
+        user_obj.save()
+        return render(request, 'login/form.html', locals())
+    else:
+        student_obj = Student.objects.get(id=request.session.get('user_id'))
+        context = {
+            'student': student_obj,
+        }
+        print(student_obj.department.departmentName)
+        return render(request, 'login/form.html', context=context)
+
 
 def update(request):
     import pandas as pd
