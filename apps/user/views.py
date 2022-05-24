@@ -52,8 +52,11 @@ def index_s(request):
         elif score.score_date >= 65:
             GPA += 2.3 * score.scoreCredit / credit
             break
+        elif score.score_date >= 60:
+            GPA += 2.0 * score.scoreCredit / credit
+            break
         else:
-            GPA += 2.0
+            pass
             break
 
     context = {
