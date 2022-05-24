@@ -376,6 +376,7 @@ def login(request):
             except Exception as e:
                 print(e)
                 message = "用户不存在！"
+                return render(request, 'login/login.html', locals())
         message = "验证码错误"
         return render(request, 'login/login.html', locals())
 
