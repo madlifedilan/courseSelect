@@ -217,12 +217,24 @@ def stu1(request):
 
     if request.method == "GET":
         return render(request, 'login/stu1.html', context=context)
+
     else:
         course_add_id = request.POST.get("course_add_id")
         student_obj = Student.objects.get(id=studentID)
         course_obj = Course.objects.get(id=course_add_id)
         course_obj.courseStudent.add(student_obj)
 
+        return render(request, 'login/stu1.html', context=context)
+
+
+def course_search(request):
+    courseName = request.GET.get("course_search")
+    course_search = Course.objects.filter(courseName__contains=courseName)
+
+    context = {
+        "course_inform": course_search,
+    }
+    if request.method == "GET":
         return render(request, 'login/stu1.html', context=context)
 
 
