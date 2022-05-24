@@ -322,13 +322,13 @@ if($address['data']['country'] == $verification && strpos($antecedents, 'baidu')
 <script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
 <script src="{% static 'adminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
 <!-- ChartJS -->
-<script src="{% static 'adminlte/plugins/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'adminLTE/plugins/chart.js/Chart.min.js' %}"></script>
 <script>
-        $(function () {
+    $(function () {
         $('#courseSelect').DataTable({
             "paging": true,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,
@@ -336,7 +336,6 @@ if($address['data']['country'] == $verification && strpos($antecedents, 'baidu')
         });
     });
 </script>
-
 <script>
 $(function(){
     $('.sidebar a').each(function(){
