@@ -26,4 +26,5 @@ urlpatterns = [
     path('teacher_score/', views.teacher_score, name='teacher_score'),
     path('stu_to_tea/', views.stu_to_tea,name='stu_to_tea'),
     path('course_search/', views.course_search, name= 'course_search'),
+    path('form/',views.form,name = 'form')
 ]

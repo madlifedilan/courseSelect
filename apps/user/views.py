@@ -431,7 +431,8 @@ def logout(request):
         return redirect("/index/")
     request.session.flush()
     return redirect("/index/")
-
+def form(request):
+    return render(request,'login/form.html',locals())
 
 def update(request):
     import pandas as pd
