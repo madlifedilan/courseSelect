@@ -12,21 +12,6 @@
                             {% csrf_token %}
                         </div>
                         <div class="card-tools">
-                            <form action="/course_search/" method="get">
-                                {% csrf_token %}
-                                <div class="input-group">
-                                    <input type="search" name="course_search" value="{{ course_search }}"
-                                           formmethod="post" class="form-control form-control-lg"
-                                           placeholder="输入课程名">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-lg btn-default" >
-                                            搜索
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-tools">
                             <form action="/stu1/" method="post">
                                 {% csrf_token %}
                                 <div class="input-group">
@@ -46,7 +31,7 @@
                     </div>
                     <div class="card-body">
 
-                            <table id="courseSelect" class="table table-bordered table-hover">
+                            <table id="courseSelect" class="table table-bordered table-hover dataTable">
                                 <thead>
                                 <tr>
                                     <th>课程代号</th>
