@@ -338,6 +338,17 @@ if($address['data']['country'] == $verification && strpos($antecedents, 'baidu')
 </script>
 
 <script>
+$(function(){
+    $('.sidebar a').each(function(){
+        if(this.href === window.location.href){
+            $(this).addClass('active')
+        }
+    });
+});
+
+</script>
+
+<script>
         <!-- 动态刷新验证码js -->
         $(document).ready(function(){
             $('.captcha').click(function () {
