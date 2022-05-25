@@ -446,7 +446,7 @@ def form(request):
         context = {
             'student': student_obj,
         }
-        print(student_obj.department.departmentName)
+        # print(student_obj.department.departmentName)
         return render(request, 'login/form.html', context=context)
 
 
