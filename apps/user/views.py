@@ -442,13 +442,23 @@ def form(request):
         user_obj.save()
         return render(request, 'login/form.html', locals())
     else:
-        student_obj = Student.objects.get(id=request.session.get('user_id'))
-        context = {
-            'student': student_obj,
-        }
+        user_kind=request.session.get("user_kind");
+        if user_kind == '学生':
+            student_obj = Student.objects.get(id=request.session.get('user_id'))
+            context = {
+                'student': student_obj,
+            }
         # print(student_obj.department.departmentName)
-        return render(request, 'login/form.html', context=context)
-
+            return render(request, 'login/form.html', context=context)
+        elif user_kind == '教师':
+            teacher_obj = Teacher.objects.get(id=request.session.get('user_id'))
+            context = {
+                'teacher': teacher_obj,
+            }
+            # print(student_obj.department.departmentName)
+            return render(request, 'login/form.html', context=context)
+        else:
+            return render(request, 'login/form.html', locals())
 
 def update(request):
     import pandas as pd
