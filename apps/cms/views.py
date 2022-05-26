@@ -128,7 +128,7 @@ def get_pagination_data(paginator, page_obj, around_count=2):
     }
 
 
-def banUser(request):
+def ViewUser(request):
     banUserList = cache.get('black', [])
     context = {
         'banUserList': banUserList
