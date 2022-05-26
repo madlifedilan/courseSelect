@@ -133,4 +133,4 @@ def ViewUser(request):
     context = {
         'banUserList': banUserList
     }
-    return render(request, 'cms/banUser.html', context=context)
+    return render(request, 'cms/ViewUser.html', context=context)
