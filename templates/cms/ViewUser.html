@@ -16,16 +16,17 @@
                                     <th>用户ID</th>
                                     <th>用户名</th>
                                     <th>用户类型</th>
+{#                                    <th>用户学院</th>#}
 {#                                    <th>授课教师</th>#}
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for banUser in banUserList %}
+                                {% for User in UserList %}
                                     <tr>
-                                        <td>{{ course.id }}</td>
-                                        <td>{{ course.courseName }}</td>
-                                        <td>{{ course.courseCredit }}</td>
-                                        <td>{{ course.courseTeacher.teacherName }}</td>
+                                        <td>{{ User.id }}</td>
+                                        <td>{{ User.name }}</td>
+                                        <td>{{ User.kind }}</td>
+{#                                        <td>{{ User.courseTeacher.teacherName }}</td>#}
                                     </tr>
                                 {% endfor %}
                                 </tbody>

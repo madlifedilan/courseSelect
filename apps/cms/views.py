@@ -7,6 +7,8 @@ import datetime
 from apps.basefunction.models import VisitNumber, DayNumber, UserIP
 from django.core.paginator import Paginator
 
+from apps.user.models import User
+
 
 def cms_dashboard(request):
     context = {}
@@ -129,8 +131,8 @@ def get_pagination_data(paginator, page_obj, around_count=2):
 
 
 def ViewUser(request):
-    banUserList = cache.get('black', [])
+    UserList = User.objects.all()
     context = {
-        'banUserList': banUserList
+        'UserList': UserList
     }
     return render(request, 'cms/ViewUser.html', context=context)

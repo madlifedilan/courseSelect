@@ -208,7 +208,7 @@ def stu1(request):
     # page_obj = paginator.page(page)
     course_inform = cache.get("course_inform")
     if not course_inform:
-        course_inform = list(Course.objects.all())
+        course_inform = Course.objects.all()
         cache.set("course_inform", course_inform, 60)
 
     context = {
