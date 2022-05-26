@@ -38,6 +38,7 @@
                                     <th>课程名称</th>
                                     <th>课程学分</th>
                                     <th>授课教师</th>
+                                    <th>学院</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -47,6 +48,7 @@
                                         <td>{{ course.courseName }}</td>
                                         <td>{{ course.courseCredit }}</td>
                                         <td>{{ course.courseTeacher.teacherName }}</td>
+                                        <td>{{ course.department.departmentName}}</td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
